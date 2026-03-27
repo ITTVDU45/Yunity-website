@@ -41,3 +41,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# next-pwa (bei `npm run build` erzeugt; Vercel/CI baut neu)
+/public/sw.js
+/public/workbox-*.js
+/public/swe-worker-*.js

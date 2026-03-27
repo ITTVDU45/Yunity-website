@@ -5,8 +5,8 @@ import { footerColumns, navItems, siteConfig } from "@/lib/site-config"
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-muted/30">
-      <div className="mx-auto max-w-6xl px-6 py-16">
+    <footer className="border-t border-border bg-muted/30 pb-[max(1rem,env(safe-area-inset-bottom))]">
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4 lg:col-span-2">
             <p className="text-lg font-semibold tracking-tight">{siteConfig.name}</p>

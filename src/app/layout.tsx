@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 
 import { SiteFooter } from "@/components/layout/site-footer"
@@ -20,8 +20,34 @@ const geistMono = Geist_Mono({
 
 const baseUrl = new URL(siteConfig.url)
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
+  ],
+}
+
 export const metadata: Metadata = {
   metadataBase: baseUrl,
+  applicationName: siteConfig.name,
+  icons: {
+    icon: [{ url: "/icons/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/icons/icon.svg", type: "image/svg+xml" }],
+  },
+  appleWebApp: {
+    capable: true,
+    title: siteConfig.name,
+    statusBarStyle: "default",
+  },
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true,
+  },
   title: {
     default: `${siteConfig.name} · Kurzfristige Personalbereitstellung`,
     template: `%s · ${siteConfig.name}`,

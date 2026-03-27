@@ -31,13 +31,13 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-b transition-[background,box-shadow,backdrop-filter] duration-300",
+        "sticky top-0 z-50 w-full border-b pt-[env(safe-area-inset-top,0px)] transition-[background,box-shadow,backdrop-filter] duration-300",
         scrolled
           ? "border-border/70 bg-background/85 shadow-sm backdrop-blur-md supports-backdrop-filter:bg-background/70"
           : "border-transparent bg-background/40 backdrop-blur-sm"
       )}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-6 lg:h-[4.25rem]">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:h-[4.25rem]">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-lg font-semibold tracking-tight text-foreground">
             {siteConfig.name}
