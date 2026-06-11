@@ -1,6 +1,8 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { AlertTriangle, CheckCircle2, TrendingUp } from "lucide-react"
 
+import { Breadcrumb } from "@/components/marketing/breadcrumb"
 import { CompanyInquiryForm } from "@/components/forms/company-inquiry-form"
 import { PageHero } from "@/components/marketing/page-hero"
 import { ProcessSteps } from "@/components/marketing/process-steps"
@@ -9,10 +11,17 @@ import { buttonVariants } from "@/components/ui/button-variants"
 import { industries } from "@/lib/content/industries"
 import { cn } from "@/lib/utils"
 
-export const metadata = {
-  title: "Für Unternehmen",
+export const metadata: Metadata = {
+  title: "Für Unternehmen – Personal kurzfristig anfragen",
   description:
-    "Kurzfristig Personal für Events, Messen, Logistik und mehr – schnelle Abstimmung, klare Prozesse.",
+    "Kurzfristig Personal für Events, Messen, Logistik und Gastronomie – schnelle Abstimmung, klare Prozesse, planbare Teams. Jetzt unverbindlich anfragen.",
+  alternates: { canonical: "/fuer-unternehmen" },
+  openGraph: {
+    url: "/fuer-unternehmen",
+    title: "Personal anfragen – Yunity für Unternehmen",
+    description:
+      "Skalierbare Teams für kurzfristige Einsätze. In drei Schritten zur Personalvermittlung – mit festen Ansprechpartner:innen.",
+  },
 }
 
 const pains = [
@@ -44,6 +53,9 @@ const wins = [
 export default function FuerUnternehmenPage() {
   return (
     <>
+      <Breadcrumb
+        items={[{ label: "Für Unternehmen", href: "/fuer-unternehmen" }]}
+      />
       <PageHero
         title="Schnelles Personal für Ihre nächste Projektphase"
         description="Wenn Zeit knapp ist und Qualität nicht verhandelbar: Wir liefern strukturierte Teams – abgestimmt auf Ort, Zeitraum und Rollenprofil."

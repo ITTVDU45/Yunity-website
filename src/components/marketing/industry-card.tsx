@@ -31,7 +31,8 @@ export function IndustryCard({ item, className }: IndustryCardProps) {
             alt={item.imageAlt}
             fill
             sizes="(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 320px"
-            unoptimized
+            quality={75}
+            loading="lazy"
             className="object-cover object-center"
           />
           <div

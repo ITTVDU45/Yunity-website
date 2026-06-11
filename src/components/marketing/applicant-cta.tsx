@@ -7,7 +7,6 @@ import { buttonVariants } from "@/components/ui/button-variants"
 import { FadeIn } from "@/components/motion/fade-in"
 import { cn } from "@/lib/utils"
 
-/** Gleiches Muster wie Hero (`unoptimized`) – zuverlässiges Laden; Motiv: Team / Zusammenarbeit. */
 const heroImage =
   "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=2000&q=85&auto=format&fit=crop"
 
@@ -22,10 +21,10 @@ export function ApplicantCta() {
                 src={heroImage}
                 alt="Team bei der Zusammenarbeit – passende Rollen und Einsätze"
                 fill
-                unoptimized
+                quality={80}
+                loading="lazy"
                 className="object-cover object-[center_35%]"
                 sizes="(max-width: 1200px) 100vw, 1152px"
-                priority={false}
               />
             </div>
             <div

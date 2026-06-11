@@ -1,19 +1,32 @@
+import type { Metadata } from "next"
 import { Mail, Phone } from "lucide-react"
 
+import { Breadcrumb } from "@/components/marketing/breadcrumb"
 import { ContactForm } from "@/components/forms/contact-form"
 import { PageHero } from "@/components/marketing/page-hero"
 import { FaqAccordion } from "@/components/marketing/faq-accordion"
+import { JsonLd } from "@/components/seo/json-ld"
 import { contactFaqs } from "@/lib/content/faqs"
+import { faqSchema } from "@/lib/seo"
 import { siteConfig } from "@/lib/site-config"
 
-export const metadata = {
-  title: "Kontakt",
-  description: "Yunity kontaktieren – Telefon, E-Mail oder Formular.",
+export const metadata: Metadata = {
+  title: "Kontakt – Personalanfrage oder Bewerbung starten",
+  description:
+    "Yunity per Telefon, E-Mail oder Formular kontaktieren. Wir antworten typischerweise innerhalb von 1–2 Werktagen – bei dringenden Einsätzen schneller.",
+  alternates: { canonical: "/kontakt" },
+  openGraph: {
+    url: "/kontakt",
+    title: "Yunity kontaktieren",
+    description:
+      "Telefon, E-Mail oder Formular – drei Wege, die zu uns führen.",
+  },
 }
 
 export default function KontaktPage() {
   return (
     <>
+      <Breadcrumb items={[{ label: "Kontakt", href: "/kontakt" }]} />
       <PageHero
         title="Lassen Sie uns kurz sprechen"
         description="Ob Personalanfrage oder Bewerbung: Wir melden uns zeitnah mit den nächsten sinnvollen Schritten."
@@ -68,6 +81,10 @@ export default function KontaktPage() {
           </div>
         </div>
       </div>
+      <JsonLd
+        id="ld-kontakt-faq"
+        data={faqSchema(contactFaqs.map((f) => ({ q: f.question, a: f.answer })))}
+      />
     </>
   )
 }

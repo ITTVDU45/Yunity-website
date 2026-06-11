@@ -1,23 +1,35 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { createElement } from "react"
 
+import { Breadcrumb } from "@/components/marketing/breadcrumb"
 import { PageHero } from "@/components/marketing/page-hero"
 import { CtaSection } from "@/components/marketing/cta-section"
 import { FadeIn } from "@/components/motion/fade-in"
+import { JsonLd } from "@/components/seo/json-ld"
 import { buttonVariants } from "@/components/ui/button-variants"
 import { serviceIconMap } from "@/lib/content/service-icons"
 import { services } from "@/lib/content/services"
+import { serviceSchema } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
-export const metadata = {
-  title: "Leistungen",
+export const metadata: Metadata = {
+  title: "Leistungen – Personalvermittlung für Event, Promotion & Logistik",
   description:
-    "Eventpersonal, Promotion, Auf- und Abbau, Stadion, Gastro, Logistik, Büro – kurzfristige Personalbereitstellung mit Yunity.",
+    "Eventpersonal, Promotion, Auf- und Abbau, Stadion, Gastro, Logistik, Büro – kurzfristige Personalbereitstellung mit klar definierten Rollen und Profilen.",
+  alternates: { canonical: "/leistungen" },
+  openGraph: {
+    url: "/leistungen",
+    title: "Leistungen – Yunity",
+    description:
+      "Sieben Personal-Kategorien für kurzfristige Einsätze – mit echten Vorteilen für Unternehmen und Bewerber:innen.",
+  },
 }
 
 export default function LeistungenPage() {
   return (
     <>
+      <Breadcrumb items={[{ label: "Leistungen", href: "/leistungen" }]} />
       <PageHero
         title="Leistungen, die sich an Ihren Bedarf koppeln"
         description="Kurzfristige Verfügbarkeit, klare Profile und Teams, die in Live-Settings performen – von der ersten Schicht bis zur langen Serie."
@@ -91,6 +103,16 @@ export default function LeistungenPage() {
         ))}
       </div>
       <CtaSection variant="muted" />
+      <JsonLd
+        id="ld-leistungen-services"
+        data={services.map((s) =>
+          serviceSchema({
+            name: s.title,
+            description: s.description,
+            url: `/leistungen#${s.id}`,
+          }),
+        )}
+      />
     </>
   )
 }

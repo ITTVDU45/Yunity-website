@@ -1,13 +1,19 @@
+import type { Metadata } from "next"
+
+import { Breadcrumb } from "@/components/marketing/breadcrumb"
 import { PageHero } from "@/components/marketing/page-hero"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Datenschutz",
   description: "Informationen zur Verarbeitung personenbezogener Daten.",
+  alternates: { canonical: "/datenschutz" },
+  robots: { index: true, follow: true },
 }
 
 export default function DatenschutzPage() {
   return (
     <>
+      <Breadcrumb items={[{ label: "Datenschutz", href: "/datenschutz" }]} />
       <PageHero
         title="Datenschutz"
         description="Platzhalter – bitte durch eine vollständige Datenschutzerklärung ersetzen."

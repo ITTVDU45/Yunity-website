@@ -110,12 +110,12 @@ export function ServiceCard({
                   alt={imageAlt}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-                  unoptimized
+                  quality={80}
                   className={cn(
                     "object-cover transition-transform duration-500 ease-out motion-reduce:transition-none",
                     !reduce && "group-hover/card:scale-[1.06]"
                   )}
-                  priority={index < 2}
+                  loading={index < 2 ? "eager" : "lazy"}
                 />
                 <div
                   className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-70"

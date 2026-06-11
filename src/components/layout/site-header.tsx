@@ -38,7 +38,30 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:h-[4.25rem]">
-        <Link href="/" className="flex items-center gap-2">
+        <Link
+          href="/"
+          className="group flex items-center gap-2 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          aria-label={`${siteConfig.name} – Startseite`}
+        >
+          <span
+            aria-hidden
+            className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/80 text-accent shadow-sm ring-1 ring-primary/10 transition-transform duration-300 group-hover:scale-105"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              className="size-4"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 5l7 9 7-9M12 14v6"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
           <span className="text-lg font-semibold tracking-tight text-foreground">
             {siteConfig.name}
           </span>

@@ -1,14 +1,20 @@
+import type { Metadata } from "next"
+
+import { Breadcrumb } from "@/components/marketing/breadcrumb"
 import { PageHero } from "@/components/marketing/page-hero"
 import { siteConfig } from "@/lib/site-config"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Impressum",
   description: "Impressum und rechtliche Angaben zu Yunity.",
+  alternates: { canonical: "/impressum" },
+  robots: { index: true, follow: true },
 }
 
 export default function ImpressumPage() {
   return (
     <>
+      <Breadcrumb items={[{ label: "Impressum", href: "/impressum" }]} />
       <PageHero
         title="Impressum"
         description="Platzhalter – bitte durch Ihre rechtskonformen Angaben ersetzen."

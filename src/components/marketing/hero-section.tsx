@@ -94,12 +94,13 @@ export function HeroSection() {
             <div className="relative min-h-[240px] w-full md:h-full md:min-h-0">
               <Image
                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80&auto=format&fit=crop"
-                alt="Team bei der Zusammenarbeit in einem modernen Büro"
+                alt="Eingespieltes Event-Team in Abstimmung – Yunity Personalvermittlung"
                 fill
-                unoptimized
+                quality={85}
                 className="object-cover object-[center_30%]"
-                sizes="(max-width: 768px) 100vw, 52vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 52vw, 640px"
                 priority
+                fetchPriority="high"
               />
               {/* Overlay: Übergang zur linken Spalte + leichte Farbtönung */}
               <div

@@ -1,16 +1,25 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { Clock, Heart, Sparkles, Wallet } from "lucide-react"
 
+import { Breadcrumb } from "@/components/marketing/breadcrumb"
 import { PageHero } from "@/components/marketing/page-hero"
 import { FadeIn } from "@/components/motion/fade-in"
 import { buttonVariants } from "@/components/ui/button-variants"
 import { services } from "@/lib/content/services"
 import { cn } from "@/lib/utils"
 
-export const metadata = {
-  title: "Für Bewerber",
+export const metadata: Metadata = {
+  title: "Für Bewerber – Flexible Jobs in Event, Gastro & Logistik",
   description:
-    "Flexible Jobs in Event, Promotion, Gastro und Logistik – fair abgestimmt, transparent geplant.",
+    "Flexible Einsätze in Event, Promotion, Gastronomie und Logistik – fair abgestimmt, transparent geplant. Bewirb dich in wenigen Schritten bei Yunity.",
+  alternates: { canonical: "/fuer-bewerber" },
+  openGraph: {
+    url: "/fuer-bewerber",
+    title: "Bewerben bei Yunity",
+    description:
+      "Verdiene flexibel in spannenden Settings. Du sagst uns dein Profil – wir matchen die passenden Einsätze.",
+  },
 }
 
 const benefits = [
@@ -63,6 +72,7 @@ const exampleJobs = [
 export default function FuerBewerberPage() {
   return (
     <>
+      <Breadcrumb items={[{ label: "Für Bewerber", href: "/fuer-bewerber" }]} />
       <PageHero
         title="Finde flexible Jobs in Event, Promotion, Gastro und Logistik"
         description="Wenn du zuverlässig bist und vor Ort liefern willst: Wir verbinden dich mit Einsätzen, die zu deinem Profil passen."

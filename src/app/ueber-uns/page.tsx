@@ -1,10 +1,20 @@
+import type { Metadata } from "next"
+
+import { Breadcrumb } from "@/components/marketing/breadcrumb"
 import { PageHero } from "@/components/marketing/page-hero"
 import { FadeIn } from "@/components/motion/fade-in"
 
-export const metadata = {
-  title: "Über uns",
+export const metadata: Metadata = {
+  title: "Über uns – Operative Personalvermittlung mit Haltung",
   description:
-    "Yunity verbindet operative Zuverlässigkeit mit moderner Personalvermittlung – menschlich, schnell, professionell.",
+    "Yunity verbindet operative Zuverlässigkeit mit moderner Personalvermittlung – menschlich, schnell, professionell. Lerne das Team und unsere Werte kennen.",
+  alternates: { canonical: "/ueber-uns" },
+  openGraph: {
+    url: "/ueber-uns",
+    title: "Über Yunity",
+    description:
+      "Wer wir sind, wofür wir stehen – und warum Zuverlässigkeit, Qualität und Flexibilität unsere Kernwerte sind.",
+  },
 }
 
 const values = [
@@ -44,6 +54,7 @@ const team = [
 export default function UeberUnsPage() {
   return (
     <>
+      <Breadcrumb items={[{ label: "Über uns", href: "/ueber-uns" }]} />
       <PageHero
         title="Menschen, die operative Realität mögen"
         description="Yunity ist auf kurzfristige Personalbereitstellung spezialisiert – mit einem Pool, der im Alltag gewachsen ist, und einem klaren Anspruch: professionell arbeiten, menschlich bleiben."

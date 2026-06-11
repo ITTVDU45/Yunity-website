@@ -1,3 +1,5 @@
+import type { Metadata } from "next"
+
 import { ApplicantCta } from "@/components/marketing/applicant-cta"
 import { CtaSection } from "@/components/marketing/cta-section"
 import { FaqAccordion } from "@/components/marketing/faq-accordion"
@@ -9,9 +11,34 @@ import { ServicesOverview } from "@/components/marketing/services-overview"
 import { StatsSection } from "@/components/marketing/stats-section"
 import { TestimonialSlider } from "@/components/marketing/testimonial-slider"
 import TechnologyStackContent from "@/components/marketing/technology-stack-content"
+import { JsonLd } from "@/components/seo/json-ld"
 import { homeFaqs } from "@/lib/content/faqs"
+import { services } from "@/lib/content/services"
 import { stats } from "@/lib/content/stats"
 import { testimonials } from "@/lib/content/testimonials"
+import { faqSchema, serviceSchema } from "@/lib/seo"
+import { siteConfig } from "@/lib/site-config"
+
+export const metadata: Metadata = {
+  title: `Flexibles Personal für Events, Promotion & Logistik`,
+  description:
+    "Kurzfristig Personal anfragen oder als Bewerber:in flexible Einsätze finden. Yunity vermittelt zuverlässige Teams für Event, Promotion, Gastro, Logistik und Office – deutschlandweit.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    url: siteConfig.url,
+    title: `${siteConfig.name} – Flexibles Personal für Events, Promotion & Logistik`,
+    description:
+      "Kurzfristig Personal anfragen oder flexible Einsätze finden. Zuverlässig, schnell, klar abgestimmt.",
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} – ${siteConfig.tagline}`,
+      },
+    ],
+  },
+}
 
 export default function HomePage() {
   return (
@@ -48,6 +75,21 @@ export default function HomePage() {
         </div>
       </section>
       <CtaSection />
+
+      <JsonLd
+        id="ld-home-faq"
+        data={faqSchema(homeFaqs.map((f) => ({ q: f.question, a: f.answer })))}
+      />
+      <JsonLd
+        id="ld-home-services"
+        data={services.map((s) =>
+          serviceSchema({
+            name: s.title,
+            description: s.description,
+            url: `/leistungen#${s.id}`,
+          }),
+        )}
+      />
     </>
   )
 }
