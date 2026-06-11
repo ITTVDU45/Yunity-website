@@ -21,7 +21,7 @@ export function ApplicantCta() {
                 src={heroImage}
                 alt="Team bei der Zusammenarbeit – passende Rollen und Einsätze"
                 fill
-                quality={80}
+                quality={75}
                 loading="lazy"
                 className="object-cover object-[center_35%]"
                 sizes="(max-width: 1200px) 100vw, 1152px"

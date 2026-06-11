@@ -1,15 +1,16 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
-import { AlertTriangle, CheckCircle2, TrendingUp } from "lucide-react"
+import { AlertTriangle, ArrowRight, CheckCircle2, TrendingUp } from "lucide-react"
 
-import { Breadcrumb } from "@/components/marketing/breadcrumb"
 import { CompanyInquiryForm } from "@/components/forms/company-inquiry-form"
+import { Breadcrumb } from "@/components/marketing/breadcrumb"
+import { IndustryCard } from "@/components/marketing/industry-card"
 import { PageHero } from "@/components/marketing/page-hero"
 import { ProcessSteps } from "@/components/marketing/process-steps"
+import { SectionHeading } from "@/components/marketing/section-heading"
 import { FadeIn } from "@/components/motion/fade-in"
-import { buttonVariants } from "@/components/ui/button-variants"
 import { industries } from "@/lib/content/industries"
-import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "Für Unternehmen – Personal kurzfristig anfragen",
@@ -25,115 +26,111 @@ export const metadata: Metadata = {
 }
 
 const pains = [
-  {
-    title: "Kurzfristige Ausfälle",
-    text: "Krankheit, Peaks oder spontane Großprojekte – ohne dass interne Teams ausbrechen.",
-    icon: AlertTriangle,
-  },
-  {
-    title: "Personalengpässe",
-    text: "Saison, Kampagnen oder Messe-Wochen: Bedarf steigt schneller als die Planung.",
-    icon: TrendingUp,
-  },
-  {
-    title: "Events mit hohem Bedarf",
-    text: "Großformate brauchen skalierbare Teams – und klare Ansprechpartner:innen.",
-    icon: CheckCircle2,
-  },
+  { title: "Kurzfristige Ausfälle", text: "Krankheit, Peaks oder spontane Großprojekte – ohne dass interne Teams ausbrechen.", icon: AlertTriangle, theme: "bg-orange-50" },
+  { title: "Personalengpässe", text: "Saison, Kampagnen oder Messe-Wochen: Bedarf steigt schneller als die Planung.", icon: TrendingUp, theme: "bg-sky-50" },
+  { title: "Hoher Projektbedarf", text: "Großformate brauchen skalierbare Teams und klare Ansprechpartner:innen.", icon: CheckCircle2, theme: "bg-emerald-50" },
 ]
 
 const wins = [
   "Schneller Zugriff auf qualifizierte Profile aus dem Pool",
   "Flexibel buchbar – von Tageseinsätzen bis zu Serien",
   "Planbare Abläufe mit Briefing und Feedback",
-  "Professionelles Auftreten vor Ort – marken- und gastorientiert",
+  "Professionelles Auftreten vor Ort",
   "Entlastung für Führung und operative Leads",
 ]
 
 export default function FuerUnternehmenPage() {
   return (
     <>
-      <Breadcrumb
-        items={[{ label: "Für Unternehmen", href: "/fuer-unternehmen" }]}
-      />
+      <Breadcrumb items={[{ label: "Für Unternehmen", href: "/fuer-unternehmen" }]} />
       <PageHero
+        eyebrow="Für Unternehmen"
         title="Schnelles Personal für Ihre nächste Projektphase"
         description="Wenn Zeit knapp ist und Qualität nicht verhandelbar: Wir liefern strukturierte Teams – abgestimmt auf Ort, Zeitraum und Rollenprofil."
+        imageSrc="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=85&auto=format&fit=crop"
+        imageAlt="Professionelles Team bei der gemeinsamen Projektplanung"
+        primaryAction={{ label: "Personal anfragen", href: "#personalanfrage" }}
+        secondaryAction={{ label: "Leistungen ansehen", href: "/leistungen" }}
+        highlights={["Kurzfristig skalierbar", "Klare Prozesse", "Feste Ansprechpartner"]}
       />
-      <section className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-        <h2 className="text-center text-2xl font-semibold tracking-tight md:text-3xl">
-          Typische Herausforderungen
-        </h2>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {pains.map((p, i) => (
-            <FadeIn key={p.title} delay={i * 0.05}>
-              <div className="h-full rounded-3xl border border-border/80 bg-muted/30 p-6">
-                <p.icon className="size-8 text-primary" aria-hidden />
-                <h3 className="mt-4 font-semibold">{p.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {p.text}
-                </p>
+      <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+        <SectionHeading
+          eyebrow="Wenn Planung auf Realität trifft"
+          title="Für typische Engpässe gemacht"
+          description="Wir verstärken dort, wo operative Belastung entsteht – ohne langwierigen Vorlauf."
+        />
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {pains.map((pain, index) => (
+            <FadeIn key={pain.title} delay={index * 0.05}>
+              <div className={`h-full rounded-[2rem] p-7 ${pain.theme}`}>
+                <pain.icon className="size-8 text-primary" aria-hidden />
+                <h3 className="mt-8 text-xl font-semibold text-primary">{pain.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-primary/65">{pain.text}</p>
               </div>
             </FadeIn>
           ))}
         </div>
       </section>
-      <section className="border-y border-border/60 bg-muted/20 py-16 md:py-20">
-        <div className="mx-auto max-w-3xl px-6">
-          <h2 className="text-center text-2xl font-semibold tracking-tight md:text-3xl">
-            Ihre Vorteile mit Yunity
-          </h2>
-          <ul className="mt-10 space-y-4">
-            {wins.map((w) => (
-              <li
-                key={w}
-                className="flex gap-3 rounded-2xl border border-border/60 bg-card px-4 py-3 text-sm leading-relaxed"
-              >
-                <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
-                {w}
-              </li>
-            ))}
-          </ul>
+      <section className="mx-auto max-w-6xl px-6 pb-16 md:pb-24">
+        <div className="overflow-hidden rounded-[2.5rem] bg-primary text-white">
+          <div className="grid lg:grid-cols-2">
+            <div className="relative min-h-[340px]">
+              <Image
+                src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1200&q=85&auto=format&fit=crop"
+                alt="Unternehmensteam in einer strukturierten Projektbesprechung"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="p-8 sm:p-10 lg:p-14">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Ihre Vorteile</p>
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight">Mehr Kapazität. Weniger Reibung.</h2>
+              <div className="mt-8 space-y-4">
+                {wins.map((win) => (
+                  <div key={win} className="flex gap-3 border-b border-white/10 pb-4 text-sm leading-6 text-white/75">
+                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
+                    {win}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <ProcessSteps />
-      <section className="py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-center text-2xl font-semibold tracking-tight md:text-3xl">
-            Branchen, die wir häufig unterstützen
-          </h2>
-          <div className="mt-10 flex flex-wrap justify-center gap-2">
-            {industries.slice(0, 8).map((ind) => (
-              <span
-                key={ind.id}
-                className="rounded-full border border-border/80 bg-card px-4 py-2 text-sm text-muted-foreground"
-              >
-                {ind.title}
-              </span>
-            ))}
-          </div>
-          <div className="mt-8 flex justify-center">
-            <Link
-              href="/branchen"
-              className={cn(buttonVariants({ variant: "outline" }), "rounded-full px-6")}
-            >
-              Alle Branchen
-            </Link>
-          </div>
+      <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <SectionHeading
+            eyebrow="Erfahrung im Einsatz"
+            title="Branchen, die wir häufig unterstützen"
+            description="Teams für dynamische Umfelder, in denen Timing und Verlässlichkeit zählen."
+            align="left"
+            className="mx-0"
+          />
+          <Link href="/branchen" className="group inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-primary">
+            Alle Branchen
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
+          </Link>
+        </div>
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {industries.slice(0, 3).map((industry) => (
+            <IndustryCard key={industry.id} item={industry} />
+          ))}
         </div>
       </section>
-      <section className="border-t border-border/60 bg-muted/25 py-16 md:py-24">
-        <div className="mx-auto grid max-w-5xl gap-12 px-6 lg:grid-cols-2 lg:items-start">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight">
-              Personalanfrage – Demo-Formular
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Beschreiben Sie kurz Bedarf und Zeitraum. Technischer Versand und CRM-Anbindung
-              können später ergänzt werden.
-            </p>
+      <section id="personalanfrage" className="scroll-mt-24 bg-sky-50 py-16 md:py-24">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+          <SectionHeading
+            eyebrow="Unverbindlich starten"
+            title="Was wird wann und wo gebraucht?"
+            description="Beschreiben Sie kurz Bedarf und Zeitraum. Wir strukturieren die Anfrage und melden uns mit den nächsten sinnvollen Schritten."
+            align="left"
+            className="mx-0 lg:sticky lg:top-28"
+          />
+          <div className="rounded-[2rem] bg-white p-7 shadow-[0_20px_60px_-40px_oklch(0.28_0.08_245/0.45)] sm:p-9">
+            <CompanyInquiryForm />
           </div>
-          <CompanyInquiryForm />
         </div>
       </section>
     </>
