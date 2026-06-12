@@ -1,43 +1,51 @@
 "use client"
 
 import {
-  SiNextdotjs,
-  SiReact,
-  SiTailwindcss,
-  SiTypescript,
-} from "react-icons/si"
+  Building2,
+  Megaphone,
+  Music2,
+  PackageOpen,
+  Trophy,
+  Utensils,
+} from "lucide-react"
 
 import { LogoLoop, type LogoItem } from "@/components/LogoLoop"
 import { SectionHeading } from "@/components/marketing/section-heading"
 import { cn } from "@/lib/utils"
 
 const iconClass =
-  "size-[1em] text-foreground/75 transition-colors group-hover/item:text-foreground dark:text-foreground/70"
+  "size-[0.82em] stroke-[1.7] text-primary/75 transition-colors group-hover/item:text-primary"
 
-const techLogos: LogoItem[] = [
+const deploymentAreas: LogoItem[] = [
   {
-    node: <SiReact className={iconClass} aria-hidden />,
-    title: "React",
-    href: "https://react.dev",
-    ariaLabel: "React",
+    node: <Music2 className={iconClass} aria-hidden />,
+    title: "Festivals",
+    ariaLabel: "Festivals",
   },
   {
-    node: <SiNextdotjs className={iconClass} aria-hidden />,
-    title: "Next.js",
-    href: "https://nextjs.org",
-    ariaLabel: "Next.js",
+    node: <Building2 className={iconClass} aria-hidden />,
+    title: "Messen & Kongresse",
+    ariaLabel: "Messen und Kongresse",
   },
   {
-    node: <SiTypescript className={iconClass} aria-hidden />,
-    title: "TypeScript",
-    href: "https://www.typescriptlang.org",
-    ariaLabel: "TypeScript",
+    node: <Trophy className={iconClass} aria-hidden />,
+    title: "Sportveranstaltungen",
+    ariaLabel: "Sportveranstaltungen",
   },
   {
-    node: <SiTailwindcss className={iconClass} aria-hidden />,
-    title: "Tailwind CSS",
-    href: "https://tailwindcss.com",
-    ariaLabel: "Tailwind CSS",
+    node: <Megaphone className={iconClass} aria-hidden />,
+    title: "Promotion & Roadshows",
+    ariaLabel: "Promotion und Roadshows",
+  },
+  {
+    node: <Utensils className={iconClass} aria-hidden />,
+    title: "Gastronomie & Catering",
+    ariaLabel: "Gastronomie und Catering",
+  },
+  {
+    node: <PackageOpen className={iconClass} aria-hidden />,
+    title: "Logistik & Aufbau",
+    ariaLabel: "Logistik und Aufbau",
   },
 ]
 
@@ -45,22 +53,22 @@ export default function TechnologyStackContent() {
   return (
     <div className="mx-auto max-w-6xl px-6">
       <SectionHeading
-        eyebrow="Technologie"
-        title="Gebaut mit einem Stack für Performance und Klarheit"
-        description="Die Website nutzt aktuelle Tools für schnelle Ladezeiten, typsichere Entwicklung und ein konsistentes Design – transparent nachvollziehbar."
+        eyebrow="Erfahrung im Einsatz"
+        title="Dort im Einsatz, wo starke Teams den Unterschied machen"
+        description="Von Festivals und Messen bis zu Sportveranstaltungen, Promotion und Gastronomie: Unsere Teams unterstützen dynamische Formate zuverlässig und flexibel."
         className="max-w-3xl"
       />
       <div className="relative mt-10 min-h-[5.5rem] w-full overflow-hidden md:mt-14 md:min-h-[6.5rem]">
         <LogoLoop
-          logos={techLogos}
-          speed={100}
+          logos={deploymentAreas}
+          speed={80}
           direction="left"
-          logoHeight={56}
-          gap={56}
+          logoHeight={48}
+          gap={64}
           hoverSpeed={0}
           scaleOnHover
           fadeOut
-          ariaLabel="Technologie-Stack: React, Next.js, TypeScript, Tailwind CSS"
+          ariaLabel="Einsatzbereiche: Festivals, Messen, Sportveranstaltungen, Promotion, Gastronomie und Logistik"
           className={cn(
             "max-w-full py-2",
             "[--logoloop-fadeColor:oklch(0.97_0_0)]",
