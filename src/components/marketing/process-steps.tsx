@@ -1,8 +1,11 @@
 "use client"
 
+import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
+import { ArrowRight } from "lucide-react"
 
 import { SectionHeading } from "@/components/marketing/section-heading"
+import { buttonVariants } from "@/components/ui/button-variants"
 import { cn } from "@/lib/utils"
 
 const steps = [
@@ -179,6 +182,31 @@ export function ProcessSteps() {
               </div>
             )
           })}
+        </div>
+
+        <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+          <Link
+            href="/kontakt"
+            className={cn(
+              buttonVariants({ size: "lg" }),
+              "group rounded-full px-8 shadow-lg shadow-primary/15"
+            )}
+          >
+            Jetzt Personal anfragen
+            <ArrowRight
+              className="size-4 transition-transform group-hover:translate-x-1"
+              aria-hidden
+            />
+          </Link>
+          <Link
+            href="/fuer-bewerber"
+            className={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "rounded-full border-primary/20 bg-background/70 px-8"
+            )}
+          >
+            Jetzt bewerben
+          </Link>
         </div>
       </div>
     </section>

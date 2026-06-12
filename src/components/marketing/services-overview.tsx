@@ -16,7 +16,7 @@ export function ServicesOverview() {
       <div className="relative mx-auto max-w-6xl px-6">
         <SectionHeading
           eyebrow="Leistungen"
-          title="Sieben Bereiche – ein klarer Fokus: operative Stärke"
+          title="Acht Bereiche – ein klarer Fokus: operative Stärke"
           description="Von Event bis Logistik: Wir besetzen Rollen dort, wo es auf Zuverlässigkeit, Tempo und Auftreten ankommt."
           className="max-w-4xl"
         />

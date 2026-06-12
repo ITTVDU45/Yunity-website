@@ -19,13 +19,13 @@ import { cn } from "@/lib/utils"
 export const metadata: Metadata = {
   title: "Leistungen – Personalvermittlung für Event, Promotion & Logistik",
   description:
-    "Eventpersonal, Promotion, Auf- und Abbau, Stadion, Gastro, Logistik, Büro – kurzfristige Personalbereitstellung mit klar definierten Rollen und Profilen.",
+    "Event- und Festivalpersonal, Promotion, Auf- und Abbau, Stadion, Gastro, Logistik und Büro – kurzfristige Personalbereitstellung mit klar definierten Rollen.",
   alternates: { canonical: "/leistungen" },
   openGraph: {
     url: "/leistungen",
     title: "Leistungen – Yunity",
     description:
-      "Sieben Personal-Kategorien für kurzfristige Einsätze – mit echten Vorteilen für Unternehmen und Bewerber:innen.",
+      "Acht Personal-Kategorien für kurzfristige Einsätze – mit echten Vorteilen für Unternehmen und Bewerber:innen.",
   },
 }
 
@@ -48,7 +48,7 @@ export default function LeistungenPage() {
         imageAlt={services[0].imageAlt}
         primaryAction={{ label: "Personal anfragen", href: "/kontakt" }}
         secondaryAction={{ label: "Als Talent bewerben", href: "/fuer-bewerber" }}
-        highlights={["7 Einsatzbereiche", "Flexible Teamgrößen", "Feste Ansprechpartner"]}
+        highlights={["8 Einsatzbereiche", "Flexible Teamgrößen", "Feste Ansprechpartner"]}
       />
       <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
         <SectionHeading

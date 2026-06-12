@@ -3,6 +3,7 @@ import {
   Briefcase,
   Construction,
   Megaphone,
+  Music2,
   PartyPopper,
   Trophy,
   Truck,
@@ -11,6 +12,7 @@ import {
 
 export const serviceIconMap = {
   party: PartyPopper,
+  music: Music2,
   megaphone: Megaphone,
   construction: Construction,
   trophy: Trophy,

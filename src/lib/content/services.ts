@@ -33,6 +33,22 @@ export const services: ServiceItem[] = [
     iconKey: "party",
   },
   {
+    id: "festivalpersonal",
+    badge: "Festival & Live",
+    imageSrc:
+      "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=900&q=80&auto=format&fit=crop",
+    imageAlt: "Festivalpublikum vor einer großen Bühne bei einem Live-Event",
+    title: "Festivalpersonal",
+    short: "Einlass, Besucherbetreuung, Gastro und Support für große Festivalflächen.",
+    description:
+      "Ob Einlass, Infopoint, Besucherlenkung oder Gastro-Support: Wir stellen belastbare Teams für Festivals und mehrtägige Live-Formate.",
+    benefitEmployer:
+      "Skalierbare Teams für hohe Besucherzahlen, lange Veranstaltungstage und wechselnde Einsatzbereiche auf dem Gelände.",
+    benefitWorker:
+      "Abwechslungsreiche Live-Einsätze, klare Schichtpläne und Zusammenarbeit in großen, eingespielten Teams.",
+    iconKey: "music",
+  },
+  {
     id: "promotion",
     badge: "Promotion",
     imageSrc:
