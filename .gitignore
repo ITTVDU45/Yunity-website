@@ -46,3 +46,16 @@ next-env.d.ts
 /public/sw.js
 /public/workbox-*.js
 /public/swe-worker-*.js
+
+
+# Backend-CMS (gleiches Repo, aber eigener Workspace)
+/Backend/node_modules/
+/Backend/apps/*/node_modules/
+/Backend/packages/*/node_modules/
+/Backend/apps/api/dist/
+/Backend/apps/admin/.next/
+/Backend/packages/*/dist/
+/Backend/.env
+/Backend/.env.local
+/Backend/**/*.tsbuildinfo
+/Backend/.git.bak/

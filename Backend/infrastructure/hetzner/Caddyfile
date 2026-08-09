@@ -1,0 +1,51 @@
+post.hostiteasy.com {
+	reverse_proxy postiz:5000
+}
+
+api.159-69-144-3.sslip.io {
+	encode zstd gzip
+
+	@media_upload path /api/v1/admin/media/upload
+	request_body @media_upload {
+		max_size 26MB
+	}
+
+	@standard_body not path /api/v1/admin/media/upload
+	request_body @standard_body {
+		max_size 1MB
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "no-referrer"
+		Permissions-Policy "camera=(), geolocation=(), microphone=()"
+		-Server
+	}
+
+	reverse_proxy backend-api-primary:4000 backend-api-secondary:4000 {
+		lb_policy first
+
+		health_uri /api/health/ready
+		health_interval 5s
+		health_timeout 3s
+		health_fails 1
+		health_passes 2
+
+		fail_duration 30s
+		max_fails 1
+		unhealthy_status 5xx
+		lb_retries 2
+		lb_try_duration 5s
+		lb_try_interval 100ms
+	}
+
+	log {
+		output file /data/logs/backend-api-access.log {
+			roll_size 10MiB
+			roll_keep 10
+			roll_keep_for 720h
+		}
+		format json
+	}
+}

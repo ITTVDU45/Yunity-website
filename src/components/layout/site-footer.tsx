@@ -11,13 +11,49 @@ import { buttonVariants } from "@/components/ui/button-variants"
 import { footerColumns, siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
 
-const trustPoints = [
+const DEFAULT_TRUST_POINTS = [
   "Kurzfristig verfügbar",
   "Feste Ansprechpartner",
   "Deutschlandweite Einsätze",
 ] as const
 
-export function SiteFooter() {
+const DEFAULT_CLAIM = "Personalbedarf oder Lust auf den nächsten Einsatz?"
+const DEFAULT_CLAIM_TEXT =
+  "Ob Unternehmen oder Bewerber:in – bei Yunity führt ein klarer Weg direkt zum passenden Team oder Job."
+
+interface SiteFooterProps {
+  /** Werte aus dem CMS; ohne Angabe bleibt der Footer unveraendert. */
+  settings?: {
+    name: string
+    legalName: string
+    email: string
+    phoneDisplay: string
+    phoneE164: string
+    linkedin: string
+    instagram: string
+    footerClaim: string
+    footerClaimText: string
+    trustPoints: string[]
+    footerColumns: { title: string; links: { href: string; label: string }[] }[]
+  }
+}
+
+export function SiteFooter({ settings }: SiteFooterProps = {}) {
+  const brand = settings?.name || siteConfig.name
+  const legalName = settings?.legalName || siteConfig.legalName
+  const email = settings?.email || siteConfig.email
+  const phoneDisplay = settings?.phoneDisplay || siteConfig.phoneDisplay
+  const phoneE164 = settings?.phoneE164 || siteConfig.phoneE164
+  const linkedin = settings?.linkedin || siteConfig.social.linkedin
+  const instagram = settings?.instagram || siteConfig.social.instagram
+  const claim = settings?.footerClaim || DEFAULT_CLAIM
+  const claimText = settings?.footerClaimText || DEFAULT_CLAIM_TEXT
+  const trustPoints = settings?.trustPoints?.length
+    ? settings.trustPoints
+    : DEFAULT_TRUST_POINTS
+  const columns = settings?.footerColumns?.length
+    ? settings.footerColumns
+    : footerColumns
   return (
     <footer className="relative overflow-hidden bg-[oklch(0.19_0.045_260)] pb-[max(1rem,env(safe-area-inset-bottom))] text-white">
       <div
@@ -36,11 +72,10 @@ export function SiteFooter() {
               Gemeinsam starten
             </p>
             <h2 className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              Personalbedarf oder Lust auf den nächsten Einsatz?
+              {claim}
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-6 text-white/65 sm:text-base">
-              Ob Unternehmen oder Bewerber:in – bei Yunity führt ein klarer Weg
-              direkt zum passenden Team oder Job.
+              {claimText}
             </p>
           </div>
 
@@ -75,7 +110,7 @@ export function SiteFooter() {
             <Link
               href="/"
               className="group inline-flex items-center gap-3 rounded-lg focus-visible:ring-2 focus-visible:ring-accent"
-              aria-label={`${siteConfig.name} – Startseite`}
+              aria-label={`${brand} – Startseite`}
             >
               <span
                 aria-hidden
@@ -98,7 +133,7 @@ export function SiteFooter() {
               </span>
               <span>
                 <span className="block text-xl font-semibold tracking-tight text-white">
-                  {siteConfig.name}
+                  {brand}
                 </span>
                 <span className="block text-xs font-medium uppercase tracking-[0.18em] text-accent">
                   Personalvermittlung
@@ -121,23 +156,23 @@ export function SiteFooter() {
 
             <div className="mt-7 flex flex-wrap gap-3">
               <a
-                href={`mailto:${siteConfig.email}`}
+                href={`mailto:${email}`}
                 className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-sm text-white/75 transition-colors hover:border-accent/40 hover:bg-accent/10 hover:text-white"
               >
                 <Mail className="size-4 text-accent" aria-hidden />
-                {siteConfig.email}
+                {email}
               </a>
               <a
-                href={`tel:${siteConfig.phoneE164}`}
+                href={`tel:${phoneE164}`}
                 className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-sm text-white/75 transition-colors hover:border-accent/40 hover:bg-accent/10 hover:text-white"
               >
                 <Phone className="size-4 text-accent" aria-hidden />
-                {siteConfig.phoneDisplay}
+                {phoneDisplay}
               </a>
             </div>
           </div>
 
-          {footerColumns.map((column) => (
+          {columns.map((column) => (
             <nav key={column.title} aria-label={column.title}>
               <p className="text-sm font-semibold text-white">{column.title}</p>
               <ul className="mt-5 space-y-3">
@@ -161,13 +196,13 @@ export function SiteFooter() {
 
         <div className="flex flex-col gap-5 pt-7 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-white/40">
-            © {new Date().getFullYear()} {siteConfig.legalName}. Alle Rechte vorbehalten.
+            © {new Date().getFullYear()} {legalName}. Alle Rechte vorbehalten.
           </p>
 
           <div className="flex items-center gap-3">
             <span className="mr-1 text-xs text-white/40">Folgen Sie uns</span>
             <a
-              href={siteConfig.social.linkedin}
+              href={linkedin}
               target="_blank"
               rel="noreferrer"
               aria-label="Yunity auf LinkedIn"
@@ -176,7 +211,7 @@ export function SiteFooter() {
               <FaLinkedinIn className="size-4" aria-hidden />
             </a>
             <a
-              href={siteConfig.social.instagram}
+              href={instagram}
               target="_blank"
               rel="noreferrer"
               aria-label="Yunity auf Instagram"

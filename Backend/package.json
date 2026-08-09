@@ -1,0 +1,22 @@
+{
+  "name": "yunity-backend",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build:packages": "npm run build -w @yunity/permissions -w @yunity/contracts -w @yunity/utilities -w @yunity/block-schemas",
+    "build:api": "npm run build -w @yunity/api",
+    "build:admin": "npm run build -w @yunity/admin",
+    "build": "npm run build:packages && npm run build:api && npm run build:admin",
+    "dev:api": "npm run start:dev -w @yunity/api",
+    "dev:admin": "npm run dev -w @yunity/admin",
+    "seed": "npm run seed -w @yunity/api",
+    "import:content": "npm run import:content -w @yunity/api",
+    "test": "npm run test -w @yunity/api",
+    "infra:up": "docker compose up -d",
+    "infra:down": "docker compose down"
+  }
+}

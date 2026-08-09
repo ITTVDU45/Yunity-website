@@ -10,7 +10,51 @@ import { buttonVariants } from "@/components/ui/button-variants"
 import { siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
 
-export function HeroSection() {
+interface HeroAction {
+  label: string
+  href: string
+}
+
+interface HeroSectionProps {
+  /** Optionale CMS-Inhalte; ohne Werte rendert der Hero exakt wie bisher. */
+  badge?: string
+  title?: string
+  description?: string
+  primaryAction?: HeroAction
+  secondaryAction?: HeroAction
+  footnote?: string
+  imageUrl?: string
+  imageAlt?: string
+}
+
+const DEFAULT_HERO = {
+  title: "Flexibles Personal für Events, Promotion, Logistik und mehr.",
+  description:
+    "Kurzfristige Personalbereitstellung mit klarer Abstimmung: Wir verbinden Unternehmen mit zuverlässigen Teams – und Bewerber:innen mit echten Einsätzen vor Ort.",
+  primaryAction: { label: "Personal anfragen", href: "/kontakt" },
+  secondaryAction: { label: "Jetzt bewerben", href: "/fuer-bewerber" },
+  footnote:
+    "DSGVO-bewusste Prozesse · Feste Ansprechpartner:innen · Operative Erfahrung in Live-Settings",
+  imageUrl:
+    "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80&auto=format&fit=crop",
+  imageAlt:
+    "Eingespieltes Event-Team in Abstimmung – Yunity Personalvermittlung",
+} as const
+
+export function HeroSection({
+  badge,
+  title,
+  description,
+  primaryAction,
+  secondaryAction,
+  footnote,
+  imageUrl,
+  imageAlt,
+}: HeroSectionProps = {}) {
+  const primary = primaryAction?.href ? primaryAction : DEFAULT_HERO.primaryAction
+  const secondary = secondaryAction?.href
+    ? secondaryAction
+    : DEFAULT_HERO.secondaryAction
   const [heroMotionReady, setHeroMotionReady] = useState(false)
 
   useEffect(() => {
@@ -41,13 +85,15 @@ export function HeroSection() {
             <div className="flex flex-col justify-center px-6 py-10 sm:px-8 sm:py-12 md:px-10 md:py-14 lg:px-12 lg:py-16">
               <div className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/10 bg-background/60 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent-foreground dark:border-white/10 dark:bg-white/5">
                 <Sparkles className="size-3.5 text-accent" aria-hidden />
-                <span className="text-primary dark:text-accent">{siteConfig.tagline}</span>
+                <span className="text-primary dark:text-accent">
+                  {badge || siteConfig.tagline}
+                </span>
               </div>
 
               <h1 className="mt-6 text-balance text-[1.75rem] font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl md:text-[2.35rem] md:leading-[1.12] lg:text-[2.65rem]">
                 <BlurText
                   as="span"
-                  text="Flexibles Personal für Events, Promotion, Logistik und mehr."
+                  text={title || DEFAULT_HERO.title}
                   delay={120}
                   animateBy="words"
                   direction="top"
@@ -57,44 +103,41 @@ export function HeroSection() {
               </h1>
 
               <p className="mt-6 max-w-lg text-pretty text-base leading-relaxed text-muted-foreground md:text-[1.05rem]">
-                Kurzfristige Personalbereitstellung mit klarer Abstimmung: Wir verbinden
-                Unternehmen mit zuverlässigen Teams – und Bewerber:innen mit echten
-                Einsätzen vor Ort.
+                {description || DEFAULT_HERO.description}
               </p>
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
-                  href="/kontakt"
+                  href={primary.href}
                   className={cn(
                     buttonVariants({ size: "lg" }),
                     "rounded-full px-7 shadow-lg shadow-primary/20"
                   )}
                 >
-                  Personal anfragen
+                  {primary.label}
                   <ArrowRight className="size-4" />
                 </Link>
                 <Link
-                  href="/fuer-bewerber"
+                  href={secondary.href}
                   className={cn(
                     buttonVariants({ variant: "outline", size: "lg" }),
                     "rounded-full border-primary/20 bg-background/50 px-7 dark:bg-white/5"
                   )}
                 >
-                  Jetzt bewerben
+                  {secondary.label}
                 </Link>
               </div>
 
               <p className="mt-8 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                DSGVO-bewusste Prozesse · Feste Ansprechpartner:innen · Operative
-                Erfahrung in Live-Settings
+                {footnote || DEFAULT_HERO.footnote}
               </p>
             </div>
 
             {/* Bild + Overlay (innerhalb der Rundung) */}
             <div className="relative min-h-[240px] w-full md:h-full md:min-h-0">
               <Image
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80&auto=format&fit=crop"
-                alt="Eingespieltes Event-Team in Abstimmung – Yunity Personalvermittlung"
+                src={imageUrl || DEFAULT_HERO.imageUrl}
+                alt={imageAlt || DEFAULT_HERO.imageAlt}
                 fill
                 quality={85}
                 className="object-cover object-[center_30%]"

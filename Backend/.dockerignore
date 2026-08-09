@@ -1,0 +1,15 @@
+node_modules
+**/node_modules
+**/dist
+**/.next
+**/.turbo
+**/*.tsbuildinfo
+.env
+.env.*
+**/.env
+**/.env.*
+infrastructure/backups/*
+!infrastructure/backups/.gitkeep
+docs
+*.md
+.git

@@ -10,9 +10,25 @@ import type { StatItem } from "@/lib/content/stats"
 
 interface StatsSectionProps {
   items: StatItem[]
+  /** Optionale CMS-Kopfzeile; ohne Werte bleiben die bisherigen Texte. */
+  eyebrow?: string
+  title?: string
+  description?: string
 }
 
-export function StatsSection({ items }: StatsSectionProps) {
+const DEFAULT_STATS_HEADER = {
+  eyebrow: "Zahlen",
+  title: "Kapazität, die sich anfühlt wie ein festes Team",
+  description:
+    "Transparente Kennzähler – angepasst an typische Anfragen aus der Praxis.",
+} as const
+
+export function StatsSection({
+  items,
+  eyebrow,
+  title,
+  description,
+}: StatsSectionProps) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-80px" })
   const reduce = useReducedMotion()
@@ -20,9 +36,9 @@ export function StatsSection({ items }: StatsSectionProps) {
   return (
     <section ref={ref} className="py-20 md:py-28">
       <SectionHeading
-        eyebrow="Zahlen"
-        title="Kapazität, die sich anfühlt wie ein festes Team"
-        description="Transparente Kennzähler – angepasst an typische Anfragen aus der Praxis."
+        eyebrow={eyebrow || DEFAULT_STATS_HEADER.eyebrow}
+        title={title || DEFAULT_STATS_HEADER.title}
+        description={description || DEFAULT_STATS_HEADER.description}
       />
       <div className="mx-auto mt-14 grid max-w-5xl gap-6 px-6 sm:grid-cols-3">
         {items.map((item, index) => (

@@ -3,10 +3,34 @@ import Link from "next/link"
 import { IndustriesSlider } from "@/components/marketing/industries-slider"
 import { SectionHeading } from "@/components/marketing/section-heading"
 import { buttonVariants } from "@/components/ui/button-variants"
-import { industries } from "@/lib/content/industries"
+import { industries, type IndustryItem } from "@/lib/content/industries"
 import { cn } from "@/lib/utils"
 
-export function IndustriesTeaser() {
+interface IndustriesTeaserProps {
+  items?: IndustryItem[]
+  eyebrow?: string
+  title?: string
+  description?: string
+  action?: { label: string; href: string }
+}
+
+const DEFAULT_INDUSTRIES_HEADER = {
+  eyebrow: "Branchen",
+  title: "Für wen wir arbeiten",
+  description:
+    "Von Agenturen bis Industrie: Wir unterstützen dort, wo kurzfristig Personal die entscheidende Hebelwirkung hat.",
+  action: { label: "Alle Branchen", href: "/branchen" },
+} as const
+
+export function IndustriesTeaser({
+  items,
+  eyebrow,
+  title,
+  description,
+  action,
+}: IndustriesTeaserProps = {}) {
+  const entries = items?.length ? items : industries
+  const cta = action?.href ? action : DEFAULT_INDUSTRIES_HEADER.action
   return (
     <section className="border-y border-border/60 bg-background py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-6">
@@ -20,23 +44,23 @@ export function IndustriesTeaser() {
           )}
         >
           <SectionHeading
-            eyebrow="Branchen"
-            title="Für wen wir arbeiten"
-            description="Von Agenturen bis Industrie: Wir unterstützen dort, wo kurzfristig Personal die entscheidende Hebelwirkung hat."
+            eyebrow={eyebrow || DEFAULT_INDUSTRIES_HEADER.eyebrow}
+            title={title || DEFAULT_INDUSTRIES_HEADER.title}
+            description={description || DEFAULT_INDUSTRIES_HEADER.description}
             className="max-w-3xl"
           />
           <div className="mt-8 md:mt-10">
-            <IndustriesSlider items={industries} embedded />
+            <IndustriesSlider items={entries} embedded />
           </div>
           <div className="mt-12 flex justify-center">
             <Link
-              href="/branchen"
+              href={cta.href}
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 "rounded-full border-sky-300/90 bg-white/85 px-8 shadow-sm backdrop-blur-[2px] hover:bg-white dark:border-sky-700/60 dark:bg-slate-950/50 dark:hover:bg-slate-950/70"
               )}
             >
-              Alle Branchen
+              {cta.label}
             </Link>
           </div>
         </div>

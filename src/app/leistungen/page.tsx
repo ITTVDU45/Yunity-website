@@ -15,6 +15,8 @@ import { serviceIconMap } from "@/lib/content/service-icons"
 import { services } from "@/lib/content/services"
 import { serviceSchema } from "@/lib/seo"
 import { cn } from "@/lib/utils"
+import { CmsSections } from "@/components/cms/section-renderer"
+import { CMS_ENABLED, cms } from "@/lib/cms/client"
 
 export const metadata: Metadata = {
   title: "Leistungen – Personalvermittlung für Event, Promotion & Logistik",
@@ -36,7 +38,16 @@ const cardThemes = [
   "bg-emerald-50",
 ]
 
-export default function LeistungenPage() {
+export default async function LeistungenPage() {
+  // Liegt die Seite veroeffentlicht im CMS, rendert sie aus dem Backend.
+  // Sonst bleibt der bestehende statische Aufbau unveraendert bestehen.
+  if (CMS_ENABLED) {
+    const page = await cms.pageBySlug("leistungen")
+    if (page && page.sections.length > 0) {
+      return <CmsSections sections={page.sections} />
+    }
+  }
+
   return (
     <>
       <Breadcrumb items={[{ label: "Leistungen", href: "/leistungen" }]} />

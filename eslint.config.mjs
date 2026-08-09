@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Das CMS-Backend ist ein eigener Workspace mit eigener Toolchain.
+    "Backend/**",
   ]),
 ]);
 

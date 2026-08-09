@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.next/
+.env
+.env.local
+*.tsbuildinfo
+coverage/
+
+# Produktions-Secrets
+infrastructure/.env.production
+.env.production
+
+# Betriebssystem
+.DS_Store
+
+# Versehentlich angelegtes lokales Datenverzeichnis (Python-Cache unter Fake-HOME)
+6a5634496c9cec9d3b8a6aee/

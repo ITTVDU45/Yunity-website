@@ -39,6 +39,20 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
         pathname: "/**",
       },
+      // Medien aus dem CMS. Ohne diesen Eintrag blockiert next/image jedes
+      // Bild aus der Mediathek. Host kommt aus der Umgebung, damit lokal
+      // (MinIO) und produktiv (S3/R2) derselbe Code laeuft.
+      ...(process.env.NEXT_PUBLIC_CMS_MEDIA_HOST
+        ? [
+            {
+              protocol: (process.env.NEXT_PUBLIC_CMS_MEDIA_PROTOCOL ??
+                "https") as "http" | "https",
+              hostname: process.env.NEXT_PUBLIC_CMS_MEDIA_HOST,
+              port: process.env.NEXT_PUBLIC_CMS_MEDIA_PORT ?? "",
+              pathname: "/**",
+            },
+          ]
+        : []),
     ],
   },
   async headers() {

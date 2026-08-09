@@ -1,30 +1,38 @@
 "use client"
 
-import { useState } from "react"
+import { useActionState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import {
+  INITIAL_FORM_STATE,
+  submitCmsForm,
+  type FormState,
+} from "@/lib/cms/actions"
 
 export function CompanyInquiryForm() {
-  const [done, setDone] = useState(false)
+  // Uebermittlung laeuft ueber die Server Action an die CMS-Inbox.
+  // Die Feldstruktur wird im Backend gepflegt; das Markup hier bleibt
+  // unveraendert, damit sich am Erscheinungsbild nichts aendert.
+  const [state, formAction, pending] = useActionState<FormState, FormData>(
+    submitCmsForm,
+    INITIAL_FORM_STATE,
+  )
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setDone(true)
-  }
-
-  if (done) {
+  if (state.status === "success") {
     return (
       <p className="rounded-2xl border border-border bg-muted/50 p-6 text-sm text-muted-foreground">
-        Danke – das ist eine Demo-Ansicht. Anbindung an E-Mail oder CRM kann später
-        ergänzt werden.
+        {state.message || "Danke für Ihre Anfrage – wir melden uns mit den nächsten Schritten."}
       </p>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form action={formAction} className="space-y-6">
+      <input type="hidden" name="__formKey" value="company-inquiry" />
+      {/* Honeypot: fuer Menschen unsichtbar, fuer Bots verlockend. */}
+      <input type="text" name="__honeypot" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="company">Unternehmen</Label>
@@ -72,8 +80,21 @@ export function CompanyInquiryForm() {
           />
         </div>
       </div>
-      <Button type="submit" size="lg" className="rounded-full px-8">
-        Anfrage senden
+      {state.status === "error" ? (
+        <p
+          role="alert"
+          className="rounded-2xl border border-destructive/30 bg-destructive/5 p-4 text-sm text-destructive"
+        >
+          {state.message}
+        </p>
+      ) : null}
+      <Button
+        type="submit"
+        size="lg"
+        disabled={pending}
+        className="rounded-full px-8"
+      >
+        {pending ? "Wird gesendet …" : "Anfrage senden"}
       </Button>
       <p className="text-xs text-muted-foreground">
         Mit Absenden stimmen Sie der Verarbeitung zu Informationszwecken zu – Details in

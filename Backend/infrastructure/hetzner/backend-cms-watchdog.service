@@ -1,0 +1,16 @@
+[Unit]
+Description=Health watchdog for the Yunity CMS API
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/backend-cms-watchdog
+User=root
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+RuntimeDirectory=backend-cms-watchdog
+RuntimeDirectoryMode=0750
+ReadWritePaths=/run/backend-cms-watchdog

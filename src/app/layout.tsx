@@ -11,6 +11,7 @@ import {
   websiteSchema,
 } from "@/lib/seo"
 import { siteConfig } from "@/lib/site-config"
+import { getSiteSettings } from "@/lib/cms/site-settings"
 
 import "./globals.css"
 
@@ -104,11 +105,15 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // Navigation und Unternehmensangaben kommen aus dem CMS, sofern dort gepflegt.
+  // Ohne aktives Backend liefert getSiteSettings die bisherigen statischen Werte.
+  const settings = await getSiteSettings()
+
   return (
     <html lang="de">
       <body
@@ -120,11 +125,11 @@ export default function RootLayout({
         >
           Zum Inhalt springen
         </a>
-        <SiteHeader />
+        <SiteHeader items={settings.navItems} siteName={settings.name} />
         <main id="main-content" className="min-h-[60vh]">
           <SitePageShell>{children}</SitePageShell>
         </main>
-        <SiteFooter />
+        <SiteFooter settings={settings} />
         <JsonLd
           id="ld-organization"
           data={[organizationSchema(), websiteSchema(), localBusinessSchema()]}
