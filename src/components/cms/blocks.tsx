@@ -777,19 +777,51 @@ export function ServiceGridBlock({
   const items = cards.map(cardToService)
   const layout = str(data, "layout") || "cards"
 
+  // Kurzlink-Panel wie auf /fuer-bewerber: Kopfzeile, Verweis, Chips.
   if (layout === "chips") {
+    const cta = action(data, "action")
     return (
-      <div className="mt-8 flex flex-wrap gap-2">
-        {items.map((service) => (
-          <Link
-            key={service.id}
-            href={`/leistungen#${service.id}`}
-            className="rounded-full bg-white px-4 py-2 text-sm font-medium text-primary shadow-sm transition hover:-translate-y-0.5"
-          >
-            {service.title}
-          </Link>
-        ))}
-      </div>
+      <section className="mx-auto max-w-6xl px-6 pb-16 md:pb-24">
+        <div className="rounded-[2.5rem] bg-sky-50 p-7 md:p-10">
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              {str(data, "eyebrow") ? (
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+                  {str(data, "eyebrow")}
+                </p>
+              ) : null}
+              {str(data, "title") ? (
+                <h2 className="mt-3 text-2xl font-semibold text-primary">
+                  {str(data, "title")}
+                </h2>
+              ) : null}
+            </div>
+            {cta ? (
+              <Link
+                href={cta.href}
+                className="group inline-flex items-center gap-2 text-sm font-semibold text-primary"
+              >
+                {cta.label}
+                <ArrowRight
+                  className="size-4 transition-transform group-hover:translate-x-1"
+                  aria-hidden
+                />
+              </Link>
+            ) : null}
+          </div>
+          <div className="mt-8 flex flex-wrap gap-2">
+            {items.map((service) => (
+              <Link
+                key={service.id}
+                href={`/leistungen#${service.id}`}
+                className="rounded-full bg-white px-4 py-2 text-sm font-medium text-primary shadow-sm transition hover:-translate-y-0.5"
+              >
+                {service.title}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
     )
   }
 
