@@ -15,7 +15,19 @@ import {
 import { navItems, siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
 
-export function SiteHeader() {
+interface SiteHeaderProps {
+  /**
+   * Navigation und Markenname aus dem CMS. Ohne Werte bleibt alles wie bisher —
+   * der Header ist eine Client-Komponente und bekommt beides vom Server-Layout
+   * hereingereicht, statt selbst zu laden.
+   */
+  items?: readonly { href: string; label: string }[]
+  siteName?: string
+}
+
+export function SiteHeader({ items, siteName }: SiteHeaderProps = {}) {
+  const links = items?.length ? items : navItems
+  const brand = siteName || siteConfig.name
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -41,7 +53,7 @@ export function SiteHeader() {
         <Link
           href="/"
           className="group flex items-center gap-2 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          aria-label={`${siteConfig.name} – Startseite`}
+          aria-label={`${brand} – Startseite`}
         >
           <span
             aria-hidden
@@ -63,7 +75,7 @@ export function SiteHeader() {
             </svg>
           </span>
           <span className="text-lg font-semibold tracking-tight text-foreground">
-            {siteConfig.name}
+            {brand}
           </span>
           <span className="hidden rounded-full bg-accent/15 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-accent-foreground sm:inline">
             Personal
@@ -74,7 +86,7 @@ export function SiteHeader() {
           className="hidden items-center gap-1 lg:flex"
           aria-label="Hauptnavigation"
         >
-          {navItems.map((item) => (
+          {links.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -120,7 +132,7 @@ export function SiteHeader() {
                 className="flex flex-col gap-1 p-3"
                 aria-label="Mobile Navigation"
               >
-                {navItems.map((item) => (
+                {links.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
