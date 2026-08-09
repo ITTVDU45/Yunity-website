@@ -1,0 +1,275 @@
+{
+  "services": [
+    {
+      "id": "eventpersonal",
+      "badge": "Event & Service",
+      "imageSrc": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Team bei einer professionellen Veranstaltung und Konferenz",
+      "title": "Eventpersonal",
+      "short": "Gastgeber:innen, Einlass, Service – reibungslose Abläufe vor Ort.",
+      "description": "Von der Begrüßung bis zur Betreuung: Wir stellen eingespielte Teams für Events jeder Größe – diskret, freundlich, lösungsorientiert.",
+      "benefitEmployer": "Skalierbare Teams, klare Ansprechpartner:innen und kurzfristige Erhöhung der Kapazität ohne langwierige Einstellungsprozesse.",
+      "benefitWorker": "Abwechslungsreiche Einsätze, faire Abstimmung der Schichten und Einarbeitung in wiederkehrende Formate.",
+      "iconKey": "party"
+    },
+    {
+      "id": "festivalpersonal",
+      "badge": "Festival & Live",
+      "imageSrc": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Festivalpublikum vor einer großen Bühne bei einem Live-Event",
+      "title": "Festivalpersonal",
+      "short": "Einlass, Besucherbetreuung, Gastro und Support für große Festivalflächen.",
+      "description": "Ob Einlass, Infopoint, Besucherlenkung oder Gastro-Support: Wir stellen belastbare Teams für Festivals und mehrtägige Live-Formate.",
+      "benefitEmployer": "Skalierbare Teams für hohe Besucherzahlen, lange Veranstaltungstage und wechselnde Einsatzbereiche auf dem Gelände.",
+      "benefitWorker": "Abwechslungsreiche Live-Einsätze, klare Schichtpläne und Zusammenarbeit in großen, eingespielten Teams.",
+      "iconKey": "music"
+    },
+    {
+      "id": "promotion",
+      "badge": "Promotion",
+      "imageSrc": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Team bei einer Markenaktion und Promotion im Außenbereich",
+      "title": "Promotionaktionen",
+      "short": "Markenbotschafter:innen mit Auftritt und Routine.",
+      "description": "Aktivierungen, Sampling und POS-Promotion: Wir vermitteln motivierte Promoter:innen, die Ihre Marke souverän repräsentieren.",
+      "benefitEmployer": "Schnelle Besetzung, Briefings nach Briefing-Vorgabe und zuverlässige Reporting-Punkte.",
+      "benefitWorker": "Spannende Kampagnen, Teamgeist vor Ort und transparente Einsatzplanung.",
+      "iconKey": "megaphone"
+    },
+    {
+      "id": "auf-abbau",
+      "badge": "Auf- & Abbau",
+      "imageSrc": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Montage und Aufbauarbeiten auf einer Baustelle mit Schutzhelm",
+      "title": "Auf- und Abbauarbeiten",
+      "short": "Strukturiertes Handwerk für temporäre Projekte.",
+      "description": "Messestände, Bühnen und temporäre Strukturen: Hilfskräfte mit Erfahrung in Logistik und sicherem Arbeiten im Team.",
+      "benefitEmployer": "Termintreue, klare Schichten und Personal, das mit Crews und Location-Teams zusammenarbeitet.",
+      "benefitWorker": "Physische, gut planbare Einsätze mit klaren Aufgaben und Teamstrukturen.",
+      "iconKey": "construction"
+    },
+    {
+      "id": "stadion",
+      "badge": "Stadion & Sport",
+      "imageSrc": "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Volles Stadion bei einer Sportveranstaltung",
+      "title": "Stadionpersonal",
+      "short": "Service und Ordnung bei Großevents.",
+      "description": "Einlasskontrollen, Gästeführung und Catering-Support: Wir unterstützen bei Sport- und Entertainment-Events mit erfahrenen Teams.",
+      "benefitEmployer": "Hohe Auslastungsspitzen abfedern und Besucherströme professionell managen.",
+      "benefitWorker": "Event-Atmosphäre, strukturierte Briefings und wiederkehrende Großformate.",
+      "iconKey": "trophy"
+    },
+    {
+      "id": "gastronomie",
+      "badge": "Gastronomie",
+      "imageSrc": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Gastronomie und Service im Restaurant mit eingedeckten Tischen",
+      "title": "Gastronomiepersonal",
+      "short": "Service, Bar und Küche – dort, wo Gäste im Mittelpunkt stehen.",
+      "description": "Von der Bankettreihe bis zur Festival-Gastro: Wir besetzen kurzfristig Service- und Hilfsrollen mit Erfahrung im Gastro-Alltag.",
+      "benefitEmployer": "Flexible Kapazität bei Saison, Events und Catering-Spitzen – ohne Personalüberhang.",
+      "benefitWorker": "Vielseitige Einsätze, faire Schichtmodelle und schnelle Integration in bestehende Teams.",
+      "iconKey": "utensils"
+    },
+    {
+      "id": "logistik",
+      "badge": "Logistik",
+      "imageSrc": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Lagerhalle mit Regalen und Warenverwaltung",
+      "title": "Logistikhelfer",
+      "short": "Kommissionierung, Warenbewegung, Unterstützung im Lager.",
+      "description": "Für Peaks, Projekte und saisonale Lasten: zuverlässige Unterstützung in der operativen Logistik.",
+      "benefitEmployer": "Schnelle Aufstockung der Kapazität mit klaren SLAs und nachvollziehbarer Planung.",
+      "benefitWorker": "Klare Aufgabenprofile, geregelte Arbeitszeiten und Einstieg auch für Quereinsteiger:innen.",
+      "iconKey": "truck"
+    },
+    {
+      "id": "buero",
+      "badge": "Büro & Office",
+      "imageSrc": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Modernes Büro mit Arbeitsplätzen und Tageslicht",
+      "title": "Büroaushilfen",
+      "short": "Backoffice, Daten, Empfang – wenn’s eng wird.",
+      "description": "Aushilfen für administrative Spitzen: von der Dokumentation bis zur telefonischen Erreichbarkeit.",
+      "benefitEmployer": "Projektbezogene Entlastung ohne langfristige Bindung – ideal bei Deadlines und Urlaubsvertretung.",
+      "benefitWorker": "Strukturierte Tätigkeiten, Büro-Nähe und planbare Einsatzfenster.",
+      "iconKey": "briefcase"
+    }
+  ],
+  "industries": [
+    {
+      "id": "eventagenturen",
+      "title": "Eventagenturen",
+      "description": "Komplexe Produktionen mit vielen Schnittstellen – wir liefern zuverlässige Teams für die operative Umsetzung.",
+      "support": "Personal für Aufbau, Laufzeit und Abbau – abgestimmt auf Ihre Crew-Struktur und Zeitpläne.",
+      "iconKey": "party",
+      "imageSrc": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Professionelle Event- und Konferenzkulisse mit Besucher:innen"
+    },
+    {
+      "id": "festivals",
+      "title": "Festivalveranstalter",
+      "description": "Hohe Besucherzahlen, lange Tage und klare Sicherheits- und Serviceanforderungen.",
+      "support": "Skalierbare Besetzung für Einlass, Gastro, Info und Support – mit Erfahrung in Großevents.",
+      "iconKey": "tent",
+      "imageSrc": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Konzertpublikum bei einem Festival mit Bühnenlicht"
+    },
+    {
+      "id": "messen",
+      "title": "Messeveranstalter",
+      "description": "Präzise Abläufe und professionelle Interaktion auf der Fläche.",
+      "support": "Hostessen, Service und Hilfskräfte für Auf- und Abbau – termingetrieben und briefingsicher.",
+      "iconKey": "building",
+      "imageSrc": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Moderner Messestand mit Besucher:innen und Ausstellung"
+    },
+    {
+      "id": "promotion",
+      "title": "Promotionagenturen",
+      "description": "Markenaktionen leben von Präsenz und Qualität – jedes Gesicht zählt.",
+      "support": "Promoter:innen mit kurzen Einarbeitungszeiten und klaren Rollenbildern.",
+      "iconKey": "megaphone",
+      "imageSrc": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Team bei einer Promotion- und Markenaktion im Außenbereich"
+    },
+    {
+      "id": "marketing",
+      "title": "Marketingagenturen",
+      "description": "Wenn Kampagnen live gehen, muss das Team auf Anhieb funktionieren.",
+      "support": "Flexible Einsatzteams für Roadshows, Pop-ups und Aktivierungen.",
+      "iconKey": "chart",
+      "imageSrc": "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Kreatives Team bei der Zusammenarbeit in einem modernen Büro"
+    },
+    {
+      "id": "gastro",
+      "title": "Gastronomie & Catering",
+      "description": "Peak-Zeiten, Events und saisonale Spitzen – ohne feste Überkapazität.",
+      "support": "Servicekräfte und Hilfsrollen für Küche und Front – kurzfristig planbar.",
+      "iconKey": "pizza",
+      "imageSrc": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Gastronomie: Restaurant mit Gästen und eingedeckten Tischen"
+    },
+    {
+      "id": "sport",
+      "title": "Stadien & Sportveranstaltungen",
+      "description": "Große Menschenmengen, hohe Standards: Sicherheit und Service im Gleichgewicht.",
+      "support": "Personal für Einlass, Service und Support – strukturiert und erfahren mit Großevents.",
+      "iconKey": "users",
+      "imageSrc": "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Volles Fußballstadion bei einer Sportveranstaltung"
+    },
+    {
+      "id": "logistik",
+      "title": "Logistikunternehmen",
+      "description": "Peaks in der Auslastung und Projektphasen erfordern schnelle Verstärkung.",
+      "support": "Hilfskräfte für Kommissionierung, Warenbewegung und operative Unterstützung.",
+      "iconKey": "truck",
+      "imageSrc": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Lagerhalle mit Regalen und Warenverwaltung"
+    },
+    {
+      "id": "projekt",
+      "title": "Projektunternehmen",
+      "description": "Projekte mit Start, Stopp und klaren Meilensteinen – Personalbedarf schwankt.",
+      "support": "Zeitlich begrenzte Teams, die auf kurzfristige Anforderungen reagieren.",
+      "iconKey": "factory",
+      "imageSrc": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Arbeiter mit Schutzhelm auf einer Baustelle"
+    },
+    {
+      "id": "kurzfristig",
+      "title": "Unternehmen mit kurzfristigem Personalbedarf",
+      "description": "Ausfälle, Auftragsspitzen oder kurzfristige Skalierung – ohne langen Vorlauf.",
+      "support": "Schnelle Abstimmung, klarer Prozess und verlässliche Besetzung aus dem Pool.",
+      "iconKey": "clock",
+      "imageSrc": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Team in einem Meeting zur schnellen Personalplanung"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "1",
+      "quote": "Wir haben kurzfristig Verstärkung für zwei Festival-Wochenenden gebraucht – die Kommunikation war klar, die Teams waren pünktlich.",
+      "name": "Lea M.",
+      "role": "Produktionsleitung",
+      "company": "Eventagentur (Berlin)",
+      "imageSrc": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Portrait einer Produktionsleiterin aus der Eventbranche"
+    },
+    {
+      "id": "2",
+      "quote": "Besonders hilfreich: ein Ansprechpartner, der operative Abläufe versteht – nicht nur „Personal stellen“, sondern mitdenken.",
+      "name": "Jonas K.",
+      "role": "Operations",
+      "company": "Messe- & Projektgeschäft",
+      "imageSrc": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Portrait eines Mitarbeiters aus dem Messe- und Projektgeschäft"
+    },
+    {
+      "id": "3",
+      "quote": "Ich suche flexible Einsätze neben dem Studium – die Abstimmung war unkompliziert, die Schichten transparent.",
+      "name": "Amina S.",
+      "role": "Studentin",
+      "company": "Pool-Mitarbeitende",
+      "imageSrc": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=900&q=80&auto=format&fit=crop",
+      "imageAlt": "Portrait einer Studentin aus dem Yunity-Mitarbeiterpool"
+    }
+  ],
+  "stats": [
+    {
+      "id": "pool",
+      "value": 850,
+      "suffix": "+",
+      "label": "Mitarbeitende im aktiven Pool"
+    },
+    {
+      "id": "time",
+      "value": 24,
+      "suffix": "h",
+      "label": "typische Erstreaktion auf Anfragen"
+    },
+    {
+      "id": "flex",
+      "value": 100,
+      "suffix": "%",
+      "label": "flexibel planbare Einsatzmodelle"
+    }
+  ],
+  "homeFaqs": [
+    {
+      "id": "1",
+      "question": "Wie schnell kann Personal bereitstehen?",
+      "answer": "Je nach Qualifikation und Region in der Regel innerhalb weniger Werktage – bei definierten Rahmenbedingungen oft noch schneller. Für wiederkehrende Formate planen wir gemeinsam eine Vorlaufzeit, die zu Ihrem Kalender passt."
+    },
+    {
+      "id": "2",
+      "question": "Welche Qualifikationen bringen die Mitarbeitenden mit?",
+      "answer": "Wir matchen nach Rolle: Erfahrung in Service, Promotion oder Logistik ist je nach Einsatz relevant – und wird transparent dokumentiert. Spezialprofile (z. B. Hygiene, Sicherheit) klären wir im Vorfeld."
+    },
+    {
+      "id": "3",
+      "question": "Wie läuft die Abrechnung und Organisation?",
+      "answer": "Wir definieren Leistungsumfang, Zeiten und Ansprechpartner:innen – damit Sie planbar bleiben. Details stimmen wir im Rahmen Ihrer Anfrage individuell ab."
+    },
+    {
+      "id": "4",
+      "question": "Kann ich auch nur für ein einzelnes Event buchen?",
+      "answer": "Ja. Wir sind auf kurzfristige und projektbezogene Einsätze ausgelegt – von einzelnen Tagen bis zu längeren Serien."
+    }
+  ],
+  "contactFaqs": [
+    {
+      "id": "c1",
+      "question": "Wann erhalte ich Rückmeldung?",
+      "answer": "Typischerweise innerhalb von 1–2 Werktagen. Bei dringenden Einsätzen: Bitte kurz im Betreff oder Telefonnummer angeben – wir priorisieren."
+    },
+    {
+      "id": "c2",
+      "question": "Einsatzgebiete – wo sind Sie aktiv?",
+      "answer": "Regionale Verfügbarkeit hängt von Projekt und Bedarf ab. Nennen Sie uns Ort und Zeitraum – dann sagen wir direkt, was realistisch ist."
+    }
+  ]
+}

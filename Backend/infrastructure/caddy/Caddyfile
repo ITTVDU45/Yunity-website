@@ -1,0 +1,24 @@
+# Reverse Proxy mit automatischem TLS (Let's Encrypt).
+# {$CMS_DOMAIN} kommt aus der Compose-Umgebung (z. B. cms.yunity.de).
+
+{$CMS_DOMAIN} {
+	encode gzip zstd
+
+	# API unter /api/*, alles andere an das Admin-Dashboard.
+	handle /api/* {
+		reverse_proxy api:4000
+	}
+	handle {
+		reverse_proxy admin:4100
+	}
+
+	# Sicherheits-Header.
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		-Server
+	}
+}

@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly COMPOSE_FILE="/opt/backend-yunity/compose.api.yaml"
+readonly STATE_DIR="/run/backend-cms-watchdog"
+readonly FAILURE_THRESHOLD=3
+
+mkdir -p "$STATE_DIR"
+
+for service in api-primary api-secondary; do
+  container_id="$(docker compose -f "$COMPOSE_FILE" ps -q "$service" 2>/dev/null || true)"
+  state_file="$STATE_DIR/$service.failures"
+
+  if [[ -n "$container_id" ]]; then
+    status="$(docker inspect --format '{{.State.Status}}:{{if .State.Health}}{{.State.Health.Status}}{{else}}none{{end}}' "$container_id" 2>/dev/null || true)"
+  else
+    status="missing"
+  fi
+
+  if [[ "$status" == "running:healthy" ]]; then
+    rm -f "$state_file"
+    continue
+  fi
+
+  failures=0
+  [[ -f "$state_file" ]] && read -r failures < "$state_file"
+  failures=$((failures + 1))
+  printf '%s\n' "$failures" > "$state_file"
+
+  if (( failures < FAILURE_THRESHOLD )); then
+    logger -t backend-cms-watchdog "$service nicht gesund ($status), Versuch $failures/$FAILURE_THRESHOLD"
+    continue
+  fi
+
+  logger -t backend-cms-watchdog "$service wird nach $failures Fehlern neu gestartet ($status)"
+  docker compose -f "$COMPOSE_FILE" up -d --no-deps "$service"
+  if [[ -n "$container_id" ]]; then
+    docker restart "$container_id" >/dev/null
+  fi
+  rm -f "$state_file"
+done

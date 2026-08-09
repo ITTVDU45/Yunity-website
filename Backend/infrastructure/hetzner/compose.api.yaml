@@ -1,0 +1,100 @@
+name: backend-yunity
+
+x-api-common: &api-common
+  image: backend-yunity-api:production
+  restart: unless-stopped
+  env_file:
+    - /etc/backend-yunity/api.env
+  environment:
+    NODE_ENV: production
+    PORT: "4000"
+    MONGODB_URI_FILE: /run/secrets/mongodb_uri
+    SESSION_SECRET_FILE: /run/secrets/session_secret
+    S3_ACCESS_KEY_FILE: /run/secrets/s3_access_key
+    S3_SECRET_KEY_FILE: /run/secrets/s3_secret_key
+    REVALIDATION_SECRET_FILE: /run/secrets/revalidation_secret
+  secrets:
+    - mongodb_uri
+    - session_secret
+    - s3_access_key
+    - s3_secret_key
+    - revalidation_secret
+  networks:
+    - edge
+    - egress
+  read_only: true
+  init: true
+  user: cms
+  cap_drop:
+    - ALL
+  security_opt:
+    - no-new-privileges:true
+  pids_limit: 128
+  mem_limit: 384m
+  mem_reservation: 128m
+  cpus: 1.0
+  tmpfs:
+    - /tmp:rw,noexec,nosuid,nodev,size=64m,mode=1777
+  stop_grace_period: 30s
+  healthcheck:
+    test:
+      - CMD
+      - node
+      - -e
+      - "const p=process.env.PORT||4000;fetch('http://127.0.0.1:'+p+'/api/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+    interval: 20s
+    timeout: 5s
+    start_period: 40s
+    retries: 3
+  logging:
+    driver: json-file
+    options:
+      max-size: 10m
+      max-file: "5"
+
+services:
+  api-primary:
+    <<: *api-common
+    container_name: backend-api-primary
+    environment:
+      NODE_ENV: production
+      PORT: "4000"
+      SCHEDULER_ENABLED: "true"
+      MONGODB_URI_FILE: /run/secrets/mongodb_uri
+      SESSION_SECRET_FILE: /run/secrets/session_secret
+      S3_ACCESS_KEY_FILE: /run/secrets/s3_access_key
+      S3_SECRET_KEY_FILE: /run/secrets/s3_secret_key
+      REVALIDATION_SECRET_FILE: /run/secrets/revalidation_secret
+
+  api-secondary:
+    <<: *api-common
+    container_name: backend-api-secondary
+    environment:
+      NODE_ENV: production
+      PORT: "4000"
+      SCHEDULER_ENABLED: "false"
+      MONGODB_URI_FILE: /run/secrets/mongodb_uri
+      SESSION_SECRET_FILE: /run/secrets/session_secret
+      S3_ACCESS_KEY_FILE: /run/secrets/s3_access_key
+      S3_SECRET_KEY_FILE: /run/secrets/s3_secret_key
+      REVALIDATION_SECRET_FILE: /run/secrets/revalidation_secret
+
+networks:
+  edge:
+    external: true
+    name: backend-cms-edge
+  egress:
+    name: backend-cms-egress
+    driver: bridge
+
+secrets:
+  mongodb_uri:
+    file: /etc/backend-yunity/secrets/mongodb_uri
+  session_secret:
+    file: /etc/backend-yunity/secrets/session_secret
+  s3_access_key:
+    file: /etc/backend-yunity/secrets/s3_access_key
+  s3_secret_key:
+    file: /etc/backend-yunity/secrets/s3_secret_key
+  revalidation_secret:
+    file: /etc/backend-yunity/secrets/revalidation_secret

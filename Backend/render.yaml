@@ -1,0 +1,61 @@
+# Render-Blueprint für die NestJS-API (Docker). Als Service-Root das cms/-
+# Verzeichnis verbinden (oder Root Directory = cms). Secrets werden im Render-
+# Dashboard gesetzt (sync: false). Der Prozess lauscht auf dem von Render
+# injizierten $PORT (env.ts liest PORT).
+services:
+  - type: web
+    name: cms-api
+    runtime: docker
+    dockerfilePath: ./infrastructure/docker/api.Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health/live
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: S3_USE_SSL
+        value: "true"
+      - key: S3_PORT
+        value: "443"
+      - key: S3_REGION
+        value: auto
+      - key: S3_AUTO_CREATE_BUCKET
+        value: "false"
+      - key: S3_BUCKET
+        value: cms-media
+      - key: S3_PRIVATE_BUCKET
+        value: cms-private
+      # --- Secrets / umgebungsspezifisch (im Dashboard setzen) ---
+      - key: MONGODB_URI
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
+      - key: ADMIN_URL
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: REVALIDATION_SECRET
+        sync: false
+      - key: S3_ENDPOINT
+        sync: false
+      - key: S3_ACCESS_KEY
+        sync: false
+      - key: S3_SECRET_KEY
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: MAIL_FROM
+        sync: false
+      # Nur beim ersten Deploy; danach entfernen.
+      - key: SUPERADMIN_EMAIL
+        sync: false
+      - key: SUPERADMIN_PASSWORD
+        sync: false
