@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 
 import { Breadcrumb } from "@/components/marketing/breadcrumb"
 import { PageHero } from "@/components/marketing/page-hero"
+import { CmsSections } from "@/components/cms/section-renderer"
+import { CMS_ENABLED, cms } from "@/lib/cms/client"
 
 export const metadata: Metadata = {
   title: "Datenschutz",
@@ -10,7 +12,16 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-export default function DatenschutzPage() {
+export default async function DatenschutzPage() {
+  // Liegt die Seite veroeffentlicht im CMS, rendert sie aus dem Backend.
+  // Sonst bleibt der bestehende statische Aufbau unveraendert bestehen.
+  if (CMS_ENABLED) {
+    const page = await cms.pageBySlug("datenschutz")
+    if (page && page.sections.length > 0) {
+      return <CmsSections sections={page.sections} />
+    }
+  }
+
   return (
     <>
       <Breadcrumb items={[{ label: "Datenschutz", href: "/datenschutz" }]} />

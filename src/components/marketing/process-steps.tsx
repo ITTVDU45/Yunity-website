@@ -8,7 +8,13 @@ import { SectionHeading } from "@/components/marketing/section-heading"
 import { buttonVariants } from "@/components/ui/button-variants"
 import { cn } from "@/lib/utils"
 
-const steps = [
+export interface ProcessStep {
+  step: string
+  title: string
+  text: string
+}
+
+const DEFAULT_STEPS: readonly ProcessStep[] = [
   {
     step: "01",
     title: "Anfrage",
@@ -34,7 +40,33 @@ const steps = [
 /** Pause zwischen Schritt 1 → 2 → 3 → 4 (ms). */
 const STEP_GAP_MS = 720
 
-export function ProcessSteps() {
+const DEFAULT_PROCESS_HEADER = {
+  eyebrow: "Ablauf",
+  title: "So funktioniert’s – transparent und planbar",
+  description:
+    "Ein Prozess, der Vertrauen schafft: von der ersten Anfrage bis zum laufenden Einsatz.",
+  primaryAction: { label: "Jetzt Personal anfragen", href: "/kontakt" },
+  secondaryAction: { label: "Jetzt bewerben", href: "/fuer-bewerber" },
+} as const
+
+interface ProcessStepsProps {
+  /** Optionale CMS-Daten; ohne Werte bleibt der Ablauf wie bisher. */
+  items?: readonly ProcessStep[]
+  eyebrow?: string
+  title?: string
+  description?: string
+  action?: { label: string; href: string }
+}
+
+export function ProcessSteps({
+  items,
+  eyebrow,
+  title,
+  description,
+  action,
+}: ProcessStepsProps = {}) {
+  const steps = items?.length ? items : DEFAULT_STEPS
+  const primary = action?.href ? action : DEFAULT_PROCESS_HEADER.primaryAction
   const triggerRef = useRef<HTMLDivElement>(null)
   const sequenceStartedRef = useRef(false)
   const [sectionInView, setSectionInView] = useState(false)
@@ -73,22 +105,26 @@ export function ProcessSteps() {
     return () => io.disconnect()
   }, [])
 
+  // Die Anzahl der Schritte kommt seit der CMS-Anbindung aus den Daten; die
+  // Sequenz laeuft deshalb ueber steps.length statt ueber eine feste Vier.
+  const stepCount = steps.length
+
   useEffect(() => {
     if (!sectionInView) return
 
     if (prefersReducedMotion) {
-      setActiveIndex(3)
+      setActiveIndex(stepCount - 1)
       return
     }
 
     setActiveIndex(-1)
-    const timers = [0, 1, 2, 3].map((i) =>
+    const timers = Array.from({ length: stepCount }, (_, i) =>
       window.setTimeout(() => setActiveIndex(i), i * STEP_GAP_MS)
     )
     return () => {
       timers.forEach(clearTimeout)
     }
-  }, [sectionInView, prefersReducedMotion])
+  }, [sectionInView, prefersReducedMotion, stepCount])
 
   const progress =
     activeIndex < 0 ? 0 : Math.min(1, (activeIndex + 1) / steps.length)
@@ -97,9 +133,9 @@ export function ProcessSteps() {
   return (
     <section className="py-20 md:py-28">
       <SectionHeading
-        eyebrow="Ablauf"
-        title="So funktioniert’s – transparent und planbar"
-        description="Ein Prozess, der Vertrauen schafft: von der ersten Anfrage bis zum laufenden Einsatz."
+        eyebrow={eyebrow || DEFAULT_PROCESS_HEADER.eyebrow}
+        title={title || DEFAULT_PROCESS_HEADER.title}
+        description={description || DEFAULT_PROCESS_HEADER.description}
       />
 
       <div ref={triggerRef} className="mx-auto mt-12 max-w-6xl px-6 md:mt-14">
@@ -186,13 +222,13 @@ export function ProcessSteps() {
 
         <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
           <Link
-            href="/kontakt"
+            href={primary.href}
             className={cn(
               buttonVariants({ size: "lg" }),
               "group rounded-full px-8 shadow-lg shadow-primary/15"
             )}
           >
-            Jetzt Personal anfragen
+            {primary.label}
             <ArrowRight
               className="size-4 transition-transform group-hover:translate-x-1"
               aria-hidden

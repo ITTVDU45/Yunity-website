@@ -10,6 +10,8 @@ import { JsonLd } from "@/components/seo/json-ld"
 import { contactFaqs } from "@/lib/content/faqs"
 import { faqSchema } from "@/lib/seo"
 import { siteConfig } from "@/lib/site-config"
+import { CmsSections } from "@/components/cms/section-renderer"
+import { CMS_ENABLED, cms } from "@/lib/cms/client"
 
 export const metadata: Metadata = {
   title: "Kontakt – Personalanfrage oder Bewerbung starten",
@@ -23,7 +25,16 @@ export const metadata: Metadata = {
   },
 }
 
-export default function KontaktPage() {
+export default async function KontaktPage() {
+  // Liegt die Seite veroeffentlicht im CMS, rendert sie aus dem Backend.
+  // Sonst bleibt der bestehende statische Aufbau unveraendert bestehen.
+  if (CMS_ENABLED) {
+    const page = await cms.pageBySlug("kontakt")
+    if (page && page.sections.length > 0) {
+      return <CmsSections sections={page.sections} />
+    }
+  }
+
   const contactCards = [
     {
       label: "Telefon",

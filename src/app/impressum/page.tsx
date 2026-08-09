@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import { Breadcrumb } from "@/components/marketing/breadcrumb"
 import { PageHero } from "@/components/marketing/page-hero"
 import { siteConfig } from "@/lib/site-config"
+import { CmsSections } from "@/components/cms/section-renderer"
+import { CMS_ENABLED, cms } from "@/lib/cms/client"
 
 export const metadata: Metadata = {
   title: "Impressum",
@@ -11,7 +13,16 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-export default function ImpressumPage() {
+export default async function ImpressumPage() {
+  // Liegt die Seite veroeffentlicht im CMS, rendert sie aus dem Backend.
+  // Sonst bleibt der bestehende statische Aufbau unveraendert bestehen.
+  if (CMS_ENABLED) {
+    const page = await cms.pageBySlug("impressum")
+    if (page && page.sections.length > 0) {
+      return <CmsSections sections={page.sections} />
+    }
+  }
+
   return (
     <>
       <Breadcrumb items={[{ label: "Impressum", href: "/impressum" }]} />

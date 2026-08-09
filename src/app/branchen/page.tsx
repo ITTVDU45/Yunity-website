@@ -7,6 +7,8 @@ import { PageHero } from "@/components/marketing/page-hero"
 import { SectionHeading } from "@/components/marketing/section-heading"
 import { FadeIn } from "@/components/motion/fade-in"
 import { industries } from "@/lib/content/industries"
+import { CmsSections } from "@/components/cms/section-renderer"
+import { CMS_ENABLED, cms } from "@/lib/cms/client"
 
 export const metadata: Metadata = {
   title: "Branchen & Einsatzbereiche – wo Yunity unterstützt",
@@ -21,7 +23,16 @@ export const metadata: Metadata = {
   },
 }
 
-export default function BranchenPage() {
+export default async function BranchenPage() {
+  // Liegt die Seite veroeffentlicht im CMS, rendert sie aus dem Backend.
+  // Sonst bleibt der bestehende statische Aufbau unveraendert bestehen.
+  if (CMS_ENABLED) {
+    const page = await cms.pageBySlug("branchen")
+    if (page && page.sections.length > 0) {
+      return <CmsSections sections={page.sections} />
+    }
+  }
+
   return (
     <>
       <Breadcrumb items={[{ label: "Branchen", href: "/branchen" }]} />

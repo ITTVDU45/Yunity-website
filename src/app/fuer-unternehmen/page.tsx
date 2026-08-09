@@ -11,6 +11,8 @@ import { ProcessSteps } from "@/components/marketing/process-steps"
 import { SectionHeading } from "@/components/marketing/section-heading"
 import { FadeIn } from "@/components/motion/fade-in"
 import { industries } from "@/lib/content/industries"
+import { CmsSections } from "@/components/cms/section-renderer"
+import { CMS_ENABLED, cms } from "@/lib/cms/client"
 
 export const metadata: Metadata = {
   title: "Für Unternehmen – Personal kurzfristig anfragen",
@@ -39,7 +41,16 @@ const wins = [
   "Entlastung für Führung und operative Leads",
 ]
 
-export default function FuerUnternehmenPage() {
+export default async function FuerUnternehmenPage() {
+  // Liegt die Seite veroeffentlicht im CMS, rendert sie aus dem Backend.
+  // Sonst bleibt der bestehende statische Aufbau unveraendert bestehen.
+  if (CMS_ENABLED) {
+    const page = await cms.pageBySlug("fuer-unternehmen")
+    if (page && page.sections.length > 0) {
+      return <CmsSections sections={page.sections} />
+    }
+  }
+
   return (
     <>
       <Breadcrumb items={[{ label: "Für Unternehmen", href: "/fuer-unternehmen" }]} />

@@ -1,30 +1,38 @@
 "use client"
 
-import { useState } from "react"
+import { useActionState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import {
+  INITIAL_FORM_STATE,
+  submitCmsForm,
+  type FormState,
+} from "@/lib/cms/actions"
 
 export function ContactForm() {
-  const [done, setDone] = useState(false)
+  // Uebermittlung laeuft ueber die Server Action an die CMS-Inbox.
+  // Die Feldstruktur wird im Backend gepflegt; das Markup hier bleibt
+  // unveraendert, damit sich am Erscheinungsbild nichts aendert.
+  const [state, formAction, pending] = useActionState<FormState, FormData>(
+    submitCmsForm,
+    INITIAL_FORM_STATE,
+  )
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setDone(true)
-  }
-
-  if (done) {
+  if (state.status === "success") {
     return (
       <p className="rounded-2xl border border-border bg-muted/50 p-6 text-sm text-muted-foreground">
-        Vielen Dank – Demo-Formular. Technischer Versand folgt bei Anbindung an Backend
-        oder E-Mail-Service.
+        {state.message || "Vielen Dank für Ihre Nachricht – wir melden uns zeitnah."}
       </p>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form action={formAction} className="space-y-5">
+      <input type="hidden" name="__formKey" value="contact" />
+      {/* Honeypot: fuer Menschen unsichtbar, fuer Bots verlockend. */}
+      <input type="text" name="__honeypot" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="c-name">Name</Label>
@@ -64,8 +72,21 @@ export function ContactForm() {
           />
         </div>
       </div>
-      <Button type="submit" size="lg" className="w-full rounded-full sm:w-auto sm:px-10">
-        Nachricht senden
+      {state.status === "error" ? (
+        <p
+          role="alert"
+          className="rounded-2xl border border-destructive/30 bg-destructive/5 p-4 text-sm text-destructive"
+        >
+          {state.message}
+        </p>
+      ) : null}
+      <Button
+        type="submit"
+        size="lg"
+        disabled={pending}
+        className="w-full rounded-full sm:w-auto sm:px-10"
+      >
+        {pending ? "Wird gesendet …" : "Nachricht senden"}
       </Button>
     </form>
   )

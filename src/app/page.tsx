@@ -18,6 +18,8 @@ import { stats } from "@/lib/content/stats"
 import { testimonials } from "@/lib/content/testimonials"
 import { faqSchema, serviceSchema } from "@/lib/seo"
 import { siteConfig } from "@/lib/site-config"
+import { CmsSections } from "@/components/cms/section-renderer"
+import { CMS_ENABLED, cms } from "@/lib/cms/client"
 
 export const metadata: Metadata = {
   title: `Flexibles Personal für Events, Promotion & Logistik`,
@@ -40,7 +42,16 @@ export const metadata: Metadata = {
   },
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Liegt die Seite veroeffentlicht im CMS, rendert sie aus dem Backend.
+  // Sonst bleibt der bestehende statische Aufbau unveraendert bestehen.
+  if (CMS_ENABLED) {
+    const page = await cms.home()
+    if (page && page.sections.length > 0) {
+      return <CmsSections sections={page.sections} />
+    }
+  }
+
   return (
     <>
       <HeroSection />

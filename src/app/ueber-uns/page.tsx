@@ -7,6 +7,8 @@ import { CtaSection } from "@/components/marketing/cta-section"
 import { PageHero } from "@/components/marketing/page-hero"
 import { SectionHeading } from "@/components/marketing/section-heading"
 import { FadeIn } from "@/components/motion/fade-in"
+import { CmsSections } from "@/components/cms/section-renderer"
+import { CMS_ENABLED, cms } from "@/lib/cms/client"
 
 export const metadata: Metadata = {
   title: "Über uns – Operative Personalvermittlung mit Haltung",
@@ -40,7 +42,16 @@ const team = [
   { id: "team-recruiting", name: "Vorname Nachname", role: "Recruiting & Pool" },
 ]
 
-export default function UeberUnsPage() {
+export default async function UeberUnsPage() {
+  // Liegt die Seite veroeffentlicht im CMS, rendert sie aus dem Backend.
+  // Sonst bleibt der bestehende statische Aufbau unveraendert bestehen.
+  if (CMS_ENABLED) {
+    const page = await cms.pageBySlug("ueber-uns")
+    if (page && page.sections.length > 0) {
+      return <CmsSections sections={page.sections} />
+    }
+  }
+
   return (
     <>
       <Breadcrumb items={[{ label: "Über uns", href: "/ueber-uns" }]} />
