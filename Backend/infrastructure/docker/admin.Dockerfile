@@ -1,4 +1,4 @@
-# Produktions-Image des Next.js-Admin-Dashboards. Build-Kontext: cms/.
+# Produktions-Image des Next.js-Admin-Dashboards. Build-Kontext: Backend/.
 # Aufruf: docker build -f infrastructure/docker/admin.Dockerfile -t cms-admin .
 
 # --- Build-Stage ---
@@ -19,7 +19,7 @@ WORKDIR /app
 
 RUN groupadd --system cms && useradd --system --gid cms --home-dir /app cms
 
-# Vollständiger Workspace-Kontext, damit `next start` die @cms/*-Pakete auflöst.
+# Vollständiger Workspace-Kontext, damit `next start` die @yunity/*-Pakete auflöst.
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/packages ./packages
 COPY --from=builder /app/package.json ./package.json
@@ -32,4 +32,4 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=40s --retries=3 \
   CMD node -e "fetch('http://localhost:4100/login').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
 
 # next start bindet an 0.0.0.0; Port aus dem package-Skript (-p 4100).
-CMD ["npm", "run", "start", "-w", "@cms/admin"]
+CMD ["npm", "run", "start", "-w", "@yunity/admin"]

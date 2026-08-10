@@ -18,7 +18,7 @@ export const siteConfig = {
     "Aushilfen",
     "Servicekräfte",
   ],
-  url: "https://www.yunity.de",
+  url: "https://yunity-jobs.de",
   ogImage: "/icons/og.png",
   email: "kontakt@yunity.de",
   phone: "+49 30 123 456 789",

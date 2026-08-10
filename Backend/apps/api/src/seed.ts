@@ -39,8 +39,8 @@ async function seed(): Promise<void> {
         $setOnInsert: {
           key: "yunity",
           name: "Yunity",
-          primaryDomain: "www.yunity.de",
-          cmsDomain: "cms.yunity.de",
+          primaryDomain: "yunity-jobs.de",
+          cmsDomain: "admin.yunity-jobs.de",
           timezone: "Europe/Berlin",
           status: "ACTIVE",
           enabledModules: {

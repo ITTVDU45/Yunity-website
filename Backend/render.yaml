@@ -1,10 +1,10 @@
-# Render-Blueprint für die NestJS-API (Docker). Als Service-Root das cms/-
-# Verzeichnis verbinden (oder Root Directory = cms). Secrets werden im Render-
-# Dashboard gesetzt (sync: false). Der Prozess lauscht auf dem von Render
-# injizierten $PORT (env.ts liest PORT).
+# Render-Blueprint für die NestJS-API (Docker).
+# Root Directory im Render-Dashboard: Backend
+# Secrets werden dort gesetzt (sync: false). Der Prozess lauscht auf dem von
+# Render injizierten $PORT (env.ts liest PORT).
 services:
   - type: web
-    name: cms-api
+    name: yunity-cms-api
     runtime: docker
     dockerfilePath: ./infrastructure/docker/api.Dockerfile
     dockerContext: .

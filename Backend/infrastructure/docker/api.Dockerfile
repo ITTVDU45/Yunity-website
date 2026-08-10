@@ -1,4 +1,4 @@
-# Produktions-Image der NestJS-API. Build-Kontext: cms/ (Workspace-Root).
+# Produktions-Image der NestJS-API. Build-Kontext: Backend/ (Workspace-Root).
 # Aufruf: docker build -f infrastructure/docker/api.Dockerfile -t cms-api .
 
 # --- Build-Stage ---
@@ -24,7 +24,7 @@ RUN groupadd --system cms \
   && useradd --system --gid cms --home-dir /app cms \
   && rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx
 
-# Gebautes Ergebnis + Abhängigkeiten übernehmen. Die @cms/*-Workspace-Pakete
+# Gebautes Ergebnis + Abhängigkeiten übernehmen. Die @yunity/*-Workspace-Pakete
 # sind als Symlinks in node_modules hinterlegt und über packages/ aufgelöst.
 COPY --chown=cms:cms --from=builder /app/node_modules ./node_modules
 COPY --chown=cms:cms --from=builder /app/packages ./packages
