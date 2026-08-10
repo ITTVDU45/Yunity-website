@@ -1,4 +1,4 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from "../../common/nest-mongoose";
 import { SchemaTypes, Types, type HydratedDocument } from "mongoose";
 import type { ContentStatus } from "../pages/publishing/workflow";
 import { CONTENT_STATUSES } from "../pages/publishing/workflow";

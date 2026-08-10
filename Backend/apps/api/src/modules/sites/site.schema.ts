@@ -1,4 +1,4 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from "../../common/nest-mongoose";
 import type { HydratedDocument } from "mongoose";
 
 export type SiteStatus = "ACTIVE" | "SUSPENDED";

@@ -1,4 +1,4 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from "../../common/nest-mongoose";
 import { SchemaTypes, Types, type HydratedDocument } from "mongoose";
 
 @Schema({ timestamps: true, collection: "navigations" })
