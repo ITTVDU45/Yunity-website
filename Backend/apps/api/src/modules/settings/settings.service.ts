@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
+import { InjectModel } from "../../common/nest-mongoose";
 import { Model, Types } from "mongoose";
 import { Setting, type SettingsGroup } from "./setting.schema";
 import { isSensitiveKey } from "./settings.config";

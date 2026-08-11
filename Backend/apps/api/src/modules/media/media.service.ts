@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import type { Readable } from "node:stream";
-import { InjectModel } from "@nestjs/mongoose";
+import { InjectModel } from "../../common/nest-mongoose";
 import { Model, Types } from "mongoose";
 import { stripUndefined } from "@yunity/utilities";
 import { escapeRegex } from "../../common/regex";

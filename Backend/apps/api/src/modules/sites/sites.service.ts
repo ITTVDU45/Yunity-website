@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
+import { InjectModel } from "../../common/nest-mongoose";
 import { Model } from "mongoose";
 import type { SiteSummary } from "@yunity/contracts";
 import { Site, type SiteDocument } from "./site.schema";

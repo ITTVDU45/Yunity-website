@@ -3,7 +3,7 @@ import {
   Logger,
   UnauthorizedException,
 } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
+import { InjectModel } from "../../common/nest-mongoose";
 import { Model } from "mongoose";
 import * as argon2 from "argon2";
 import { env } from "../../config/env";

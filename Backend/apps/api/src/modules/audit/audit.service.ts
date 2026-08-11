@@ -1,5 +1,5 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
+import { InjectModel } from "../../common/nest-mongoose";
 import { Model } from "mongoose";
 import { AuditLog, type AuditLogDocument } from "./audit-log.schema";
 

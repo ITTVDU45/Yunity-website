@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
+import { InjectModel } from "../../common/nest-mongoose";
 import { Model, Types, type HydratedDocument } from "mongoose";
 import { slugify } from "@yunity/utilities";
 import {

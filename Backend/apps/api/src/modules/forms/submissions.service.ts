@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable, Logger } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
-import { Cron, CronExpression } from "@nestjs/schedule";
+import { InjectModel } from "../../common/nest-mongoose";
 import { createHmac } from "node:crypto";
 import { Model, Types } from "mongoose";
 import { env } from "../../config/env";
@@ -208,7 +207,12 @@ export class SubmissionsService {
   }
 
   /** Taeglich: Uebermittlungen jenseits der Aufbewahrungsfrist hart loeschen. */
-  @Cron(CronExpression.EVERY_DAY_AT_3AM)
+  /**
+   * Loescht abgelaufene Uebermittlungen. Der Zeitplan liegt bewusst NICHT hier:
+   * @nestjs/schedule zieht den Nest-Kern nach, der sich nicht in einen
+   * Next-Build packen laesst. Ausgeloest wird die Methode von
+   * `submissions.cron.ts` (NestJS) bzw. von der Cron-Route der Admin-App.
+   */
   async purgeExpired(): Promise<void> {
     if (!env.SCHEDULER_ENABLED) {
       return;

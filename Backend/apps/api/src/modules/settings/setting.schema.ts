@@ -14,7 +14,9 @@ export class Setting {
   @Prop({ type: SchemaTypes.ObjectId, ref: "Site", required: true, index: true })
   siteId: Types.ObjectId;
 
-  @Prop({ required: true })
+  // Union-Typ: der Compiler kann daraus keinen design:type ableiten (SWC meldet
+  // "ambiguous type"), deshalb der Typ explizit.
+  @Prop({ type: String, required: true })
   group: SettingsGroup;
 
   @Prop({ required: true })

@@ -6,6 +6,7 @@ import { FormsService } from "./forms.service";
 import { MailService } from "./mail.service";
 import { SubmissionsController } from "./submissions.controller";
 import { SubmissionsService } from "./submissions.service";
+import { SubmissionsCron } from "./submissions.cron";
 import { Form, FormSchema } from "./schemas/form.schema";
 import {
   FormSubmission,
@@ -20,7 +21,8 @@ import {
     ]),
     AuditModule,
   ],
-  providers: [FormsService, SubmissionsService, MailService],
+  providers: [FormsService, SubmissionsService,
+    SubmissionsCron, MailService],
   controllers: [FormsController, SubmissionsController],
   exports: [FormsService, SubmissionsService],
 })

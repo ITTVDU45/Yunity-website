@@ -18,3 +18,14 @@ import "reflect-metadata"
 export { Prop } from "@nestjs/mongoose/dist/decorators/prop.decorator";
 export { Schema } from "@nestjs/mongoose/dist/decorators/schema.decorator";
 export { SchemaFactory } from "@nestjs/mongoose/dist/factories/schema.factory";
+
+/**
+ * InjectModel haengt nur an @nestjs/common (fuer Inject) und den paketinternen
+ * Utils — ebenfalls kernfrei. In der Admin-App ist der Dekorator wirkungslos,
+ * weil die Services dort von Hand instanziiert werden; er muss nur aufloesbar
+ * sein, damit dieselbe Datei in beiden Welten laedt.
+ */
+export {
+  InjectModel,
+  InjectConnection,
+} from "@nestjs/mongoose/dist/common/mongoose.decorators"
